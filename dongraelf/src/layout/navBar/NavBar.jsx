@@ -40,7 +40,15 @@ const NavBar = () => {
               <FiMenu />
             </IconButton>
           )} */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+          <Box
+            onClick={clickLogo}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0,
+              cursor: "pointer",
+            }}
+          >
             <img
               src="/favicon.png"
               alt="logo"
@@ -52,7 +60,6 @@ const NavBar = () => {
               }}
             />
             <Typography
-              onClick={clickLogo}
               variant="h6"
               component="div"
               sx={{

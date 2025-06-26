@@ -1,5 +1,5 @@
-import Layout from "./layout/Layout";
-import Router from "./routes/router";
+import Layout from "./layout/Layout.jsx";
+import Router from "./routes/router.jsx";
 
 function App() {
   return (

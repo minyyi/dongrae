@@ -4,42 +4,43 @@ import {
   Typography,
   Button,
   styled,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
+  // Dialog,
+  // DialogTitle,
+  // DialogContent,
+  // DialogActions,
 } from "@mui/material";
 
-// Styled Components for geometric shapes and particles
-const GeometricShape = styled(Box)(
-  ({
-    theme,
-    delay,
-    top,
-    left,
-    right,
-    transform,
-    borderRadius,
-    width,
-    height,
-  }) => ({
-    position: "absolute",
-    border: "2px solid #d4af37",
-    animation: `float 6s ease-in-out infinite ${delay || "0s"}`,
-    top: top,
-    left: left,
-    right: right,
-    transform: transform,
-    borderRadius: borderRadius,
-    width: width,
-    height: height,
-  })
-);
+// 완전히 새로운 스타일 컴포넌트들 (DOM에 불필요한 props 전달 방지)
+const GeometricShape = styled("div", {
+  shouldForwardProp: (prop) =>
+    ![
+      "delay",
+      "top",
+      "left",
+      "right",
+      "transform",
+      "borderRadius",
+      "width",
+      "height",
+    ].includes(prop),
+})(({ delay, top, left, right, transform, borderRadius, width, height }) => ({
+  position: "absolute",
+  border: "2px solid #d4af37",
+  animation: `float 6s ease-in-out infinite ${delay || "0s"}`,
+  top: top,
+  left: left,
+  right: right,
+  transform: transform,
+  borderRadius: borderRadius,
+  width: width,
+  height: height,
+  pointerEvents: "none",
+}));
 
-// animationDelay prop이 DOM에 전달되지 않도록 shouldForwardProp 사용
-const Particle = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "animationDelay",
-})(({ theme, top, left, animationDelay }) => ({
+const Particle = styled("div", {
+  shouldForwardProp: (prop) =>
+    !["animationDelay", "top", "left"].includes(prop),
+})(({ top, left, animationDelay }) => ({
   position: "absolute",
   width: 4,
   height: 4,
@@ -49,13 +50,13 @@ const Particle = styled(Box, {
   animation: `sparkle 3s linear infinite ${animationDelay || "0s"}`,
   top: top,
   left: left,
-  pointerEvents: "none", // 접근성 개선: 포커스 방지
+  pointerEvents: "none",
 }));
 
-// animationDelay prop이 DOM에 전달되지 않도록 shouldForwardProp 사용
-const LawIcon = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "animationDelay",
-})(({ theme, top, left, right, animationDelay }) => ({
+const LawIcon = styled("div", {
+  shouldForwardProp: (prop) =>
+    !["animationDelay", "top", "left", "right"].includes(prop),
+})(({ top, left, right, animationDelay }) => ({
   position: "absolute",
   fontSize: "24px",
   color: "rgba(212, 175, 55, 0.15)",
@@ -152,33 +153,21 @@ const HeroSection = () => {
     };
   }, [isClient]);
 
-  // 버튼 클릭 시 스크롤 부드러운 효과
-  const handleCtaClick = (e, targetId) => {
-    e.preventDefault();
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
   // Dialog 닫기 함수
-  const handleCloseDialog = () => {
-    setOpen(false);
-  };
+  // const handleCloseDialog = () => {
+  //   setOpen(false);
+  // };
 
-  // 전화 걸기 함수
-  const handleCallPhone = () => {
-    window.location.href = "tel:051-507-7000";
-    setOpen(false);
-  };
+  // // 전화 걸기 함수
+  // const handleCallPhone = () => {
+  //   window.location.href = "tel:051-507-7000";
+  //   setOpen(false);
+  // };
 
   return (
-    <Box
+    <div
       ref={heroRef}
-      sx={{
+      style={{
         height: "100vh",
         background:
           "linear-gradient(135deg, #1a2332 0%, #2c3e50 50%, #34495e 100%)",
@@ -189,11 +178,12 @@ const HeroSection = () => {
         overflow: "hidden",
       }}
     >
-      {/* 배경 기하학적 요소들 - 접근성을 위해 aria-hidden 추가 */}
-      <Box
+      {/* 배경 기하학적 요소들 - 완전히 접근성에서 제외 */}
+      <div
         className="geometric-bg"
         aria-hidden="true"
-        sx={{
+        role="presentation"
+        style={{
           position: "absolute",
           top: 0,
           left: 0,
@@ -201,6 +191,7 @@ const HeroSection = () => {
           height: "100%",
           opacity: 0.1,
           zIndex: 1,
+          pointerEvents: "none",
         }}
       >
         <GeometricShape
@@ -238,10 +229,15 @@ const HeroSection = () => {
             animationDelay={p.animationDelay}
           />
         ))}
-      </Box>
+      </div>
 
-      {/* 법률 아이콘들 - 접근성을 위해 aria-hidden 추가 */}
-      <Box className="law-icons" aria-hidden="true">
+      {/* 법률 아이콘들 - 완전히 접근성에서 제외 */}
+      <div
+        className="law-icons"
+        aria-hidden="true"
+        role="presentation"
+        style={{ pointerEvents: "none" }}
+      >
         <LawIcon className="law-icon" top="15%" left="5%">
           ⚖️
         </LawIcon>
@@ -257,7 +253,7 @@ const HeroSection = () => {
         <LawIcon className="law-icon" top="75%" left="8%" animationDelay="12s">
           📋
         </LawIcon>
-      </Box>
+      </div>
 
       {/* 메인 콘텐츠 */}
       <Box
@@ -279,10 +275,10 @@ const HeroSection = () => {
             animation: "fadeInUp 1s ease-out 0.5s forwards",
           }}
         >
-          <Box
+          <div
             className="logo-icon"
             aria-label="법무법인 동래 로고"
-            sx={{
+            style={{
               width: 80,
               height: 80,
               margin: "0 auto 20px",
@@ -298,7 +294,7 @@ const HeroSection = () => {
             }}
           >
             ⚖
-          </Box>
+          </div>
           <Typography
             variant="h5"
             component="h2"
@@ -349,15 +345,13 @@ const HeroSection = () => {
           기업법무 • 민사소송 • 형사변호 • 국제거래
         </Typography>
 
-        <Box
+        <div
           className="cta-container"
-          sx={{
+          style={{
             opacity: 1,
             animation: "fadeInUp 1s ease-out 2s forwards",
             display: "flex",
             justifyContent: "center",
-            flexDirection: { xs: "column", md: "row" },
-            gap: { xs: "10px", md: "20px" },
           }}
         >
           <Button
@@ -374,7 +368,6 @@ const HeroSection = () => {
               fontSize: "1.1rem",
               transition: "all 0.3s ease",
               boxShadow: "0 8px 25px rgba(212, 175, 55, 0.3)",
-              margin: { xs: "0 auto", md: "0 10px" },
               position: "relative",
               overflow: "hidden",
               "&:hover": {
@@ -400,26 +393,28 @@ const HeroSection = () => {
           >
             무료 상담 신청
           </Button>
-        </Box>
+        </div>
       </Box>
 
-      {/* 스크롤 인디케이터 - 접근성을 위해 aria-hidden 추가 */}
-      {isClient && (
-        <Box
+      {/* 스크롤 인디케이터 */}
+      {/* {isClient && (
+        <div
           className="scroll-indicator"
           aria-hidden="true"
-          sx={{
+          role="presentation"
+          style={{
             position: "absolute",
             bottom: "30px",
             left: "50%",
             transform: "translateX(-50%)",
             opacity: 0,
             animation: "fadeIn 5s ease-out 5s forwards",
+            pointerEvents: "none",
           }}
         >
-          <Box
+          <div
             className="scroll-arrow"
-            sx={{
+            style={{
               width: "30px",
               height: "30px",
               borderRight: "2px solid #d4af37",
@@ -428,17 +423,18 @@ const HeroSection = () => {
               animation: "bounce 2s infinite",
             }}
           />
-        </Box>
-      )}
+        </div>
+      )} */}
 
-      {/* 상담 신청 다이얼로그 - 접근성 개선 */}
-      <Dialog
+      {/* 상담 신청 다이얼로그 */}
+      {/* <Dialog
         open={open}
         onClose={handleCloseDialog}
         aria-labelledby="consultation-dialog-title"
         aria-describedby="consultation-dialog-description"
         maxWidth="sm"
         fullWidth
+        disablePortal={false}
       >
         <DialogTitle id="consultation-dialog-title">무료 상담 신청</DialogTitle>
         <DialogContent>
@@ -447,20 +443,21 @@ const HeroSection = () => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="inherit">
+          <Button onClick={handleCloseDialog} color="inherit" type="button">
             닫기
           </Button>
           <Button
             onClick={handleCallPhone}
             variant="contained"
             color="primary"
+            type="button"
             aria-label="051-507-7000번으로 전화 걸기"
           >
             전화걸기
           </Button>
         </DialogActions>
-      </Dialog>
-    </Box>
+      </Dialog> */}
+    </div>
   );
 };
 
