@@ -49,6 +49,7 @@ const Particle = styled(Box, {
   animation: `sparkle 3s linear infinite ${animationDelay || "0s"}`,
   top: top,
   left: left,
+  pointerEvents: "none", // 접근성 개선: 포커스 방지
 }));
 
 // animationDelay prop이 DOM에 전달되지 않도록 shouldForwardProp 사용
@@ -163,6 +164,17 @@ const HeroSection = () => {
     }
   };
 
+  // Dialog 닫기 함수
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+
+  // 전화 걸기 함수
+  const handleCallPhone = () => {
+    window.location.href = "tel:051-507-7000";
+    setOpen(false);
+  };
+
   return (
     <Box
       ref={heroRef}
@@ -177,8 +189,10 @@ const HeroSection = () => {
         overflow: "hidden",
       }}
     >
+      {/* 배경 기하학적 요소들 - 접근성을 위해 aria-hidden 추가 */}
       <Box
         className="geometric-bg"
+        aria-hidden="true"
         sx={{
           position: "absolute",
           top: 0,
@@ -226,7 +240,8 @@ const HeroSection = () => {
         ))}
       </Box>
 
-      <Box className="law-icons">
+      {/* 법률 아이콘들 - 접근성을 위해 aria-hidden 추가 */}
+      <Box className="law-icons" aria-hidden="true">
         <LawIcon className="law-icon" top="15%" left="5%">
           ⚖️
         </LawIcon>
@@ -244,6 +259,7 @@ const HeroSection = () => {
         </LawIcon>
       </Box>
 
+      {/* 메인 콘텐츠 */}
       <Box
         className="content-container"
         sx={{
@@ -265,6 +281,7 @@ const HeroSection = () => {
         >
           <Box
             className="logo-icon"
+            aria-label="법무법인 동래 로고"
             sx={{
               width: 80,
               height: 80,
@@ -346,6 +363,7 @@ const HeroSection = () => {
           <Button
             variant="contained"
             onClick={() => setOpen(true)}
+            aria-label="무료 상담 신청하기"
             sx={{
               padding: "18px 40px",
               background: "linear-gradient(45deg, #d4af37, #f1c40f)",
@@ -385,9 +403,11 @@ const HeroSection = () => {
         </Box>
       </Box>
 
+      {/* 스크롤 인디케이터 - 접근성을 위해 aria-hidden 추가 */}
       {isClient && (
         <Box
           className="scroll-indicator"
+          aria-hidden="true"
           sx={{
             position: "absolute",
             bottom: "30px",
@@ -411,14 +431,31 @@ const HeroSection = () => {
         </Box>
       )}
 
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>무료 상담 신청</DialogTitle>
+      {/* 상담 신청 다이얼로그 - 접근성 개선 */}
+      <Dialog
+        open={open}
+        onClose={handleCloseDialog}
+        aria-labelledby="consultation-dialog-title"
+        aria-describedby="consultation-dialog-description"
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle id="consultation-dialog-title">무료 상담 신청</DialogTitle>
         <DialogContent>
-          <Typography>상담 문의: 051-507-7000</Typography>
+          <Typography id="consultation-dialog-description">
+            상담 문의: 051-507-7000
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>닫기</Button>
-          <Button onClick={() => (window.location.href = "tel:051-507-7000")}>
+          <Button onClick={handleCloseDialog} color="inherit">
+            닫기
+          </Button>
+          <Button
+            onClick={handleCallPhone}
+            variant="contained"
+            color="primary"
+            aria-label="051-507-7000번으로 전화 걸기"
+          >
             전화걸기
           </Button>
         </DialogActions>
