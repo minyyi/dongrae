@@ -36,7 +36,10 @@ const GeometricShape = styled(Box)(
   })
 );
 
-const Particle = styled(Box)(({ theme, top, left, animationDelay }) => ({
+// animationDelay prop이 DOM에 전달되지 않도록 shouldForwardProp 사용
+const Particle = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "animationDelay",
+})(({ theme, top, left, animationDelay }) => ({
   position: "absolute",
   width: 4,
   height: 4,
@@ -48,7 +51,10 @@ const Particle = styled(Box)(({ theme, top, left, animationDelay }) => ({
   left: left,
 }));
 
-const LawIcon = styled(Box)(({ theme, top, left, right, animationDelay }) => ({
+// animationDelay prop이 DOM에 전달되지 않도록 shouldForwardProp 사용
+const LawIcon = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "animationDelay",
+})(({ theme, top, left, right, animationDelay }) => ({
   position: "absolute",
   fontSize: "24px",
   color: "rgba(212, 175, 55, 0.15)",
@@ -59,30 +65,46 @@ const LawIcon = styled(Box)(({ theme, top, left, right, animationDelay }) => ({
   pointerEvents: "none",
 }));
 
+// 시드 기반 랜덤 함수 (SSR 안전)
+const seededRandom = (seed) => {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
+
+// 고정된 파티클 배열 생성 (서버/클라이언트 동일)
+const generateFixedParticles = () => {
+  const particles = [];
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      id: i,
+      left: seededRandom(i * 7) * 100 + "%",
+      top: seededRandom(i * 13) * 100 + "%",
+      animationDelay: seededRandom(i * 17) * 3 + "s",
+    });
+  }
+  return particles;
+};
+
 const HeroSection = () => {
   const heroRef = useRef(null);
   const [particles, setParticles] = useState([]);
   const [open, setOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // 파티클 생성 로직
+  // 클라이언트 사이드임을 확인
   useEffect(() => {
-    const newParticles = [];
-    for (let i = 0; i < 50; i++) {
-      newParticles.push({
-        id: i,
-        left: Math.random() * 100 + "%",
-        top: Math.random() * 100 + "%",
-        animationDelay: Math.random() * 3 + "s",
-      });
-    }
-    setParticles(newParticles);
+    setIsClient(true);
+    // 고정된 파티클 배열 사용
+    setParticles(generateFixedParticles());
   }, []);
 
-  // 마우스 움직임에 따른 패럴랙스 효과
+  // 마우스 움직임에 따른 패럴랙스 효과 (클라이언트 전용)
   useEffect(() => {
+    if (!isClient) return;
+
     const handleMouseMove = (e) => {
       const shapes = document.querySelectorAll(".geometric-shape");
-      const lawIcons = document.querySelectorAll(".law-icon"); // 법률 아이콘도 움직이도록 추가
+      const lawIcons = document.querySelectorAll(".law-icon");
       const mouseX = e.clientX / window.innerWidth;
       const mouseY = e.clientY / window.innerHeight;
 
@@ -102,7 +124,7 @@ const HeroSection = () => {
       });
 
       lawIcons.forEach((icon, index) => {
-        const intensity = (index + 1) * 5; // 아이콘은 조금 덜 움직이도록
+        const intensity = (index + 1) * 5;
         const x = (mouseX - 0.5) * intensity;
         const y = (mouseY - 0.5) * intensity;
         icon.style.transform += ` translate(${x}px, ${y}px)`;
@@ -127,9 +149,9 @@ const HeroSection = () => {
         heroElement.removeEventListener("mousemove", handleMouseMove);
       }
     };
-  }, []);
+  }, [isClient]);
 
-  // 버튼 클릭 시 스크롤 부드러운 효과 + 리플 효과 (MUI Button에 내장된 ripple 효과 사용)
+  // 버튼 클릭 시 스크롤 부드러운 효과
   const handleCtaClick = (e, targetId) => {
     e.preventDefault();
     const targetElement = document.querySelector(targetId);
@@ -168,6 +190,7 @@ const HeroSection = () => {
         }}
       >
         <GeometricShape
+          className="geometric-shape"
           width={200}
           height={200}
           top="10%"
@@ -176,6 +199,7 @@ const HeroSection = () => {
           delay="0s"
         />
         <GeometricShape
+          className="geometric-shape"
           width={150}
           height={150}
           top="60%"
@@ -184,6 +208,7 @@ const HeroSection = () => {
           delay="2s"
         />
         <GeometricShape
+          className="geometric-shape"
           width={100}
           height={100}
           top="20%"
@@ -202,19 +227,19 @@ const HeroSection = () => {
       </Box>
 
       <Box className="law-icons">
-        <LawIcon top="15%" left="5%">
+        <LawIcon className="law-icon" top="15%" left="5%">
           ⚖️
         </LawIcon>
-        <LawIcon top="25%" right="8%" animationDelay="3s">
+        <LawIcon className="law-icon" top="25%" right="8%" animationDelay="3s">
           📜
         </LawIcon>
-        <LawIcon top="45%" left="3%" animationDelay="6s">
+        <LawIcon className="law-icon" top="45%" left="3%" animationDelay="6s">
           🏛️
         </LawIcon>
-        <LawIcon top="65%" right="12%" animationDelay="9s">
+        <LawIcon className="law-icon" top="65%" right="12%" animationDelay="9s">
           ⚖️
         </LawIcon>
-        <LawIcon top="75%" left="8%" animationDelay="12s">
+        <LawIcon className="law-icon" top="75%" left="8%" animationDelay="12s">
           📋
         </LawIcon>
       </Box>
@@ -331,13 +356,13 @@ const HeroSection = () => {
               fontSize: "1.1rem",
               transition: "all 0.3s ease",
               boxShadow: "0 8px 25px rgba(212, 175, 55, 0.3)",
-              margin: { xs: "0 auto", md: "0 10px" }, // 모바일 중앙 정렬
+              margin: { xs: "0 auto", md: "0 10px" },
               position: "relative",
               overflow: "hidden",
               "&:hover": {
                 transform: "translateY(-3px)",
                 boxShadow: "0 12px 35px rgba(212, 175, 55, 0.4)",
-                background: "linear-gradient(45deg, #d4af37, #f1c40f)", // hover 시 배경 유지
+                background: "linear-gradient(45deg, #d4af37, #f1c40f)",
               },
               "&::before": {
                 content: '""',
@@ -357,74 +382,34 @@ const HeroSection = () => {
           >
             무료 상담 신청
           </Button>
-          {/* <Button
-            variant="outlined" // MUI 아웃라인 버튼 스타일 사용
-            onClick={(e) => handleCtaClick(e, "#about")}
-            sx={{
-              padding: "18px 40px",
-              background: "transparent",
-              border: "2px solid #d4af37",
-              color: "#d4af37",
-              textDecoration: "none",
-              borderRadius: "50px",
-              fontWeight: 600,
-              fontSize: "1.1rem",
-              transition: "all 0.3s ease",
-              boxShadow: "0 8px 25px rgba(212, 175, 55, 0.3)", // 그림자 추가
-              margin: { xs: "0 auto", md: "0 10px" },
-              position: "relative",
-              overflow: "hidden",
-              "&:hover": {
-                background: "#d4af37",
-                color: "#1a2332",
-                transform: "translateY(-3px)",
-                boxShadow: "0 12px 35px rgba(212, 175, 55, 0.4)",
-                border: "2px solid #d4af37", // hover 시에도 테두리 유지
-              },
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: "-100%",
-                width: "100%",
-                height: "100%",
-                background:
-                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
-                transition: "left 0.5s",
-              },
-              "&:hover::before": {
-                left: "100%",
-              },
-            }}
-          >
-            법무법인 소개
-          </Button> */}
         </Box>
       </Box>
 
-      <Box
-        className="scroll-indicator"
-        sx={{
-          position: "absolute",
-          bottom: "30px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: 0,
-          animation: "fadeIn 5s ease-out 5s forwards",
-        }}
-      >
+      {isClient && (
         <Box
-          className="scroll-arrow"
+          className="scroll-indicator"
           sx={{
-            width: "30px",
-            height: "30px",
-            borderRight: "2px solid #d4af37",
-            borderBottom: "2px solid #d4af37",
-            transform: "rotate(45deg)",
-            animation: "bounce 2s infinite",
+            position: "absolute",
+            bottom: "30px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            opacity: 0,
+            animation: "fadeIn 5s ease-out 5s forwards",
           }}
-        />
-      </Box>
+        >
+          <Box
+            className="scroll-arrow"
+            sx={{
+              width: "30px",
+              height: "30px",
+              borderRight: "2px solid #d4af37",
+              borderBottom: "2px solid #d4af37",
+              transform: "rotate(45deg)",
+              animation: "bounce 2s infinite",
+            }}
+          />
+        </Box>
+      )}
 
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>무료 상담 신청</DialogTitle>
@@ -433,7 +418,7 @@ const HeroSection = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>닫기</Button>
-          <Button onClick={() => (window.location.href = "tel:02-1234-5678")}>
+          <Button onClick={() => (window.location.href = "tel:051-507-7000")}>
             전화걸기
           </Button>
         </DialogActions>
