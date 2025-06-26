@@ -42,7 +42,7 @@ const NavBar = () => {
           )} */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
             <img
-              src="/favicon1.png"
+              src="/favicon.png"
               alt="logo"
               style={{
                 width: "40px",
