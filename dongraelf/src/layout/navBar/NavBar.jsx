@@ -2,8 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { FiMenu } from "react-icons/fi";
-import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -13,7 +11,7 @@ const NavBar = () => {
     navigate("/");
   };
   const location = useLocation(); // 현재 경로 가져오기
-  const isLandingPage = location.pathname === "/landing"; // LandingPage 여부 확인
+  // const isLandingPage = location.pathname === "/landing"; // LandingPage 여부 확인
   const pages = [
     { name: "소개", path: "/info" },
     { name: "구성원", path: "/members" },
@@ -42,17 +40,30 @@ const NavBar = () => {
               <FiMenu />
             </IconButton>
           )} */}
-          <Typography
-            onClick={clickLogo}
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              ml: 4,
-            }}
-          >
-            법무법인 <span style={{ fontSize: "28px" }}>동 래</span>
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+            <img
+              src="/favicon1.png"
+              alt="logo"
+              style={{
+                width: "40px",
+                height: "38px",
+                marginLeft: "16px",
+                borderRadius: "4px",
+              }}
+            />
+            <Typography
+              onClick={clickLogo}
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                ml: 2,
+              }}
+            >
+              법무법인 <span style={{ fontSize: "28px" }}>동 래</span>
+            </Typography>
+          </Box>
+
           <Box
             sx={{
               flexGrow: 1,
