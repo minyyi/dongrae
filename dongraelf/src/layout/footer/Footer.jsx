@@ -1,17 +1,17 @@
 import React from "react";
 import { Box, Typography, Container } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
-import { IoLogoGithub } from "react-icons/io";
-import { IoLogoYoutube } from "react-icons/io";
-import { IoLogoInstagram } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+// import { IoLogoGithub } from "react-icons/io";
+// import { IoLogoYoutube } from "react-icons/io";
+// import { IoLogoInstagram } from "react-icons/io";
 import { useTheme } from "@mui/material/styles";
 
 const Footer = () => {
   const theme = useTheme();
-  //   const navigate = useNavigate();
-  //   const clickLogo = () => {
-  //     navigate("/");
-  //   };
+  const navigate = useNavigate();
+  const clickLogo = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -30,12 +30,25 @@ const Footer = () => {
             // flexDirection: "column",
             // rowGap: 1,
             justifyContent: "center",
-            columnGap: 6,
+            columnGap: 10,
           }}
         >
           {/* 로고, 시간 */}
-          <Box sx={{ display: "flex", cursor: "pointer" }}>
-            <Typography>법무법인 동래</Typography>
+          <Box
+            sx={{ display: "flex", cursor: "pointer", flexDirection: "column" }}
+            onClick={clickLogo}
+          >
+            <img
+              src="/logo.png"
+              alt="logo"
+              style={{
+                width: "120px",
+                height: "92px",
+                marginLeft: "16px",
+                borderRadius: "4px",
+              }}
+            />
+            {/* <Typography>법무법인 동래</Typography> */}
           </Box>
           <Box>
             <Box
