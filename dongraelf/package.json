@@ -4,13 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node_modules/.bin/vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "npm install && node_modules/.bin/vite build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
