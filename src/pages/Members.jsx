@@ -71,7 +71,6 @@ const Members = () => {
               alignItems: "flex-end",
               justifyContent: "space-between",
               width: "100%",
-              //   gap: 6,
               flexDirection: "row",
               mb: 2,
             }}
@@ -92,8 +91,6 @@ const Members = () => {
                 mb: 1,
                 textAlign: "center",
                 fontWeight: "bold",
-                // whiteSpace: "pre-line",
-                // whiteSpace: isMobile ? "pre-line" : "normal",
                 whiteSpace: "pre-line",
                 [theme.breakpoints.up("sm")]: {
                   whiteSpace: "normal",
