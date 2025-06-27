@@ -15,17 +15,17 @@ const Members = () => {
     {
       name: "최현우 \n변호사",
       img: "/lawyer_choi.png",
-      description: " 사법시험 37회, 연수원 27기",
+      description: "사법시험 37회, 연수원 27기",
     },
     {
       name: "김충희 \n변호사",
       img: "/lawyer_kim.png",
-      description: " 사법시험 37회, 연수원 27기",
+      description: "사법시험 37회, 연수원 27기",
     },
     {
       name: "배경렬 \n변호사",
       img: "/lawyer_bae.jpg",
-      description: " 사법시험 44회, 연수원 34기",
+      description: "사법시험 44회, 연수원 34기",
     },
   ];
   return (
