@@ -4,10 +4,10 @@ import {
   Typography,
   Button,
   styled,
-  // Dialog,
-  // DialogTitle,
-  // DialogContent,
-  // DialogActions,
+   Dialog,
+   DialogTitle,
+   DialogContent,
+   DialogActions,
 } from "@mui/material";
 
 // 완전히 새로운 스타일 컴포넌트들 (DOM에 불필요한 props 전달 방지)
@@ -154,15 +154,15 @@ const HeroSection = () => {
   }, [isClient]);
 
   // Dialog 닫기 함수
-  // const handleCloseDialog = () => {
-  //   setOpen(false);
-  // };
+   const handleCloseDialog = () => {
+     setOpen(false);
+   };
 
   // // 전화 걸기 함수
-  // const handleCallPhone = () => {
-  //   window.location.href = "tel:051-507-7000";
-  //   setOpen(false);
-  // };
+   const handleCallPhone = () => {
+     window.location.href = "tel:051-507-7000";
+     setOpen(false);
+   };
 
   return (
     <div
@@ -427,7 +427,7 @@ const HeroSection = () => {
       )} */}
 
       {/* 상담 신청 다이얼로그 */}
-      {/* <Dialog
+       <Dialog
         open={open}
         onClose={handleCloseDialog}
         aria-labelledby="consultation-dialog-title"
@@ -456,7 +456,7 @@ const HeroSection = () => {
             전화걸기
           </Button>
         </DialogActions>
-      </Dialog> */}
+      </Dialog> 
     </div>
   );
 };
