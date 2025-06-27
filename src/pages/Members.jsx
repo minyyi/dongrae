@@ -24,7 +24,7 @@ const Members = () => {
     },
     {
       name: "배경렬 \n변호사",
-      img: "/noimage.png",
+      img: "/lawyer_bae.jpg",
       description: " 사법시험 44회, 연수원 34기",
     },
   ];
