@@ -13,7 +13,7 @@ const getColorTheme = () => {
         main: "#6A9AB0",
       },
       fourth: {
-        main: "#EAD8B1",
+        main: "#d7ccc8",
       },
     },
   };
