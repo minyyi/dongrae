@@ -115,7 +115,7 @@ const NavBar = () => {
               >
                 {page.name}
               </Button>
-            ))}{" "}
+            ))}
           </Box>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
