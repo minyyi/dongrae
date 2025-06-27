@@ -231,7 +231,7 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* 법률 아이콘들 - 완전히 접근성에서 제외 */}
+      {/* 법률 아이콘들  */}
       <div
         className="law-icons"
         aria-hidden="true"
