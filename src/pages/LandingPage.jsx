@@ -88,6 +88,75 @@ const generateFixedParticles = () => {
 };
 
 const HeroSection = () => {
+  useEffect(() => {
+    const organizationSchema = {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      name: "법무법인 동래",
+      alternateName: "부산 법무법인 동래",
+      url: "https://www.dongraelaw.shop/",
+      logo: "https://www.dongraelaw.shop/logo.png",
+      telephone: "051-507-7000",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "거제1동 1490‑3 세헌빌딩 5층",
+        addressLocality: "부산광역시",
+        addressRegion: "연제구",
+        postalCode: "47500",
+        addressCountry: "KR",
+      },
+      areaServed: "부산광역시",
+      openingHours: "Mo-Fr 09:00-18:00",
+      priceRange: "$$",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "법률 서비스",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "민사소송",
+              description: "계약분쟁, 손해배상, 부동산분쟁 전문",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "형사변호",
+              description: "형사사건 전문 변호, 구속영장 대응",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "기업법무",
+              description: "계약서 작성, 법률 자문, 기업 컨설팅",
+            },
+          },
+        ],
+      },
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(organizationSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const scripts = document.querySelectorAll(
+        'script[type="application/ld+json"]'
+      );
+      scripts.forEach((s) => {
+        if (s.text.includes('"name":"법무법인 동래"')) {
+          document.head.removeChild(s);
+        }
+      });
+    };
+  }, []);
+
   const heroRef = useRef(null);
   const [particles, setParticles] = useState([]);
   const [open, setOpen] = useState(false);
@@ -309,8 +378,8 @@ const HeroSection = () => {
         </Box>
 
         <Typography
-          variant="h2"
           component="h2"
+          variant="h2"
           className="main-title"
           sx={{
             fontSize: { xs: "2.5rem", md: "3.5rem" },
@@ -328,8 +397,8 @@ const HeroSection = () => {
         </Typography>
 
         <Typography
-          variant="body1"
           component="h3"
+          variant="body1"
           className="subtitle"
           sx={{
             fontSize: { xs: "1.2rem", md: "1.4rem" },
@@ -436,7 +505,12 @@ const HeroSection = () => {
         fullWidth
         disablePortal={false}
       >
-        <DialogTitle id="consultation-dialog-title">무료 상담 신청</DialogTitle>
+        <DialogTitle
+          aria-label="051-507-7000번으로 즉시 전화상담"
+          id="consultation-dialog-title"
+        >
+          무료 상담 신청
+        </DialogTitle>
         <DialogContent>
           <Typography id="consultation-dialog-description">
             상담 문의: 051-507-7000

@@ -15,7 +15,7 @@ const NavBar = () => {
   const pages = [
     { name: "소개", path: "/info" },
     { name: "구성원", path: "/members" },
-    // { name: "contact", path: "/contact" },
+    { name: "FAQ", path: "/faq" },
   ];
 
   const handlePageClick = (path) => {
@@ -52,6 +52,7 @@ const NavBar = () => {
             <img
               src="/favicon.png"
               alt="logo"
+              itemProp="logo"
               style={{
                 width: "40px",
                 height: "38px",
