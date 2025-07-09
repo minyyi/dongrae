@@ -1,13 +1,13 @@
-# 법무법인 동래 robots.txt
+# Dongrae Law Firm robots.txt
 
-# 모든 검색엔진 허용
+# Allow all search engines
 User-agent: *
 Allow: /
 
-# 크롤링 속도 조절 (서버 부하 방지)
+# Crawl delay for server load management
 Crawl-delay: 1
 
-# 불필요한 페이지 차단
+# Block unnecessary pages
 Disallow: /admin/
 Disallow: /private/
 Disallow: /_next/static/
@@ -16,30 +16,30 @@ Disallow: /*.json$
 Disallow: /404
 Disallow: /error
 
-# 중요: 사이트맵 위치 지정
+# Sitemap location
 Sitemap: https://www.dongraelaw.shop/sitemap.xml
 
-# 구글봇 특별 설정
+# Google bot settings
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
-# 네이버봇 특별 설정  
+# Naver bot settings  
 User-agent: Yeti
 Allow: /
 Crawl-delay: 1
 
-# 다음/카카오봇 설정
+# Daum/Kakao bot settings
 User-agent: Daumoa
 Allow: /
 Crawl-delay: 1
 
-# 빙봇 설정
+# Bing bot settings
 User-agent: bingbot
 Allow: /
 Crawl-delay: 1
 
-# 악성 봇 차단
+# Block malicious bots
 User-agent: AhrefsBot
 Disallow: /
 
