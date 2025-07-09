@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
+import { getCurrentLanguage, getLanguageText } from "../utils/language";
 
 // 완전히 새로운 스타일 컴포넌트들 (DOM에 불필요한 props 전달 방지)
 const GeometricShape = styled("div", {
@@ -88,52 +89,68 @@ const generateFixedParticles = () => {
 };
 
 const HeroSection = () => {
+  const currentLang = getCurrentLanguage();
+
   useEffect(() => {
     const organizationSchema = {
       "@context": "https://schema.org",
       "@type": "LegalService",
-      name: "법무법인 동래",
-      alternateName: "부산 법무법인 동래",
-      url: "https://www.dongraelaw.shop/",
+      name: currentLang === "en" ? "Dongrae Law Firm" : "법무법인 동래",
+      alternateName:
+        currentLang === "en" ? "Busan Dongrae Law Firm" : "부산 법무법인 동래",
+      url:
+        currentLang === "en"
+          ? "https://en.dongraelaw.shop/"
+          : "https://ko.dongraelaw.shop/",
       logo: "https://www.dongraelaw.shop/logo.png",
       telephone: "051-507-7000",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "거제1동 1490‑3 세헌빌딩 5층",
-        addressLocality: "부산광역시",
-        addressRegion: "연제구",
+        streetAddress: "Seheon Building 5F, 1490-3 Geoje 1-dong",
+        addressLocality: "Busan",
+        addressRegion: "Yeonje-gu",
         postalCode: "47500",
         addressCountry: "KR",
       },
-      areaServed: "부산광역시",
+      areaServed:
+        currentLang === "en" ? "Busan Metropolitan City" : "부산광역시",
       openingHours: "Mo-Fr 09:00-18:00",
       priceRange: "$$",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "법률 서비스",
+        name: currentLang === "en" ? "Legal Services" : "법률 서비스",
         itemListElement: [
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "민사소송",
-              description: "계약분쟁, 손해배상, 부동산분쟁 전문",
+              name: currentLang === "en" ? "Civil Litigation" : "민사소송",
+              description:
+                currentLang === "en"
+                  ? "Contract disputes, damages, real estate disputes"
+                  : "계약분쟁, 손해배상, 부동산분쟁 전문",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "형사변호",
-              description: "형사사건 전문 변호, 구속영장 대응",
+              name: currentLang === "en" ? "Criminal Defense" : "형사변호",
+              description:
+                currentLang === "en"
+                  ? "Criminal case defense, arrest warrant response"
+                  : "형사사건 전문 변호, 구속영장 대응",
             },
           },
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "기업법무",
-              description: "계약서 작성, 법률 자문, 기업 컨설팅",
+              name: currentLang === "en" ? "Corporate Law" : "기업법무",
+              description:
+                currentLang === "en"
+                  ? "Contract drafting, legal consultation, corporate consulting"
+                  : "계약서 작성, 법률 자문, 기업 컨설팅",
             },
           },
         ],
@@ -150,12 +167,12 @@ const HeroSection = () => {
         'script[type="application/ld+json"]'
       );
       scripts.forEach((s) => {
-        if (s.text.includes('"name":"법무법인 동래"')) {
+        if (s.text.includes('"@type":"LegalService"')) {
           document.head.removeChild(s);
         }
       });
     };
-  }, []);
+  }, [currentLang]);
 
   const heroRef = useRef(null);
   const [particles, setParticles] = useState([]);
@@ -373,7 +390,7 @@ const HeroSection = () => {
               mb: 6,
             }}
           >
-            법무법인 동래
+            {getLanguageText("법무법인 동래", "Dongrae Law Firm")}
           </Typography>
         </Box>
 
@@ -391,9 +408,18 @@ const HeroSection = () => {
             lineHeight: 1.4,
           }}
         >
-          신뢰할 수 있는
-          <br />
-          법률 파트너
+          {getLanguageText(
+            <>
+              신뢰할 수 있는
+              <br />
+              법률 파트너
+            </>,
+            <>
+              Trusted
+              <br />
+              Legal Partner
+            </>
+          )}
         </Typography>
 
         <Typography
@@ -409,9 +435,20 @@ const HeroSection = () => {
             fontWeight: 300,
           }}
         >
-          전문성과 경험을 바탕으로 최고의 법률 서비스를 제공합니다
-          <br />
-          기업법무 • 민사소송 • 형사변호 • 국제거래
+          {getLanguageText(
+            <>
+              전문성과 경험을 바탕으로 최고의 법률 서비스를 제공합니다
+              <br />
+              기업법무 • 민사소송 • 형사변호 • 국제거래
+            </>,
+            <>
+              Providing the best legal services based on expertise and
+              experience
+              <br />
+              Corporate Law • Civil Litigation • Criminal Defense •
+              International Trade
+            </>
+          )}{" "}
         </Typography>
 
         <div
@@ -426,7 +463,10 @@ const HeroSection = () => {
           <Button
             variant="contained"
             onClick={() => setOpen(true)}
-            aria-label="무료 상담 신청하기"
+            aria-label={getLanguageText(
+              "무료 상담 신청하기",
+              "Request Free Consultation"
+            )}
             sx={{
               padding: "18px 40px",
               background: "linear-gradient(45deg, #d4af37, #f1c40f)",
@@ -460,40 +500,10 @@ const HeroSection = () => {
               },
             }}
           >
-            무료 상담 신청
+            {getLanguageText("무료 상담 신청", "Free Consultation")}
           </Button>
         </div>
       </Box>
-
-      {/* 스크롤 인디케이터 */}
-      {/* {isClient && (
-        <div
-          className="scroll-indicator"
-          aria-hidden="true"
-          role="presentation"
-          style={{
-            position: "absolute",
-            bottom: "30px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            opacity: 0,
-            animation: "fadeIn 5s ease-out 5s forwards",
-            pointerEvents: "none",
-          }}
-        >
-          <div
-            className="scroll-arrow"
-            style={{
-              width: "30px",
-              height: "30px",
-              borderRight: "2px solid #d4af37",
-              borderBottom: "2px solid #d4af37",
-              transform: "rotate(45deg)",
-              animation: "bounce 2s infinite",
-            }}
-          />
-        </div>
-      )} */}
 
       {/* 상담 신청 다이얼로그 */}
       <Dialog
@@ -509,16 +519,19 @@ const HeroSection = () => {
           aria-label="051-507-7000번으로 즉시 전화상담"
           id="consultation-dialog-title"
         >
-          무료 상담 신청
+          {getLanguageText("무료 상담 신청", "Free Consultation Request")}
         </DialogTitle>
         <DialogContent>
           <Typography id="consultation-dialog-description">
-            상담 문의: 051-507-7000
+            {getLanguageText(
+              "상담 문의: 051-507-7000",
+              "Consultation Inquiry: 051-507-7000"
+            )}
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="inherit" type="button">
-            닫기
+            {getLanguageText("닫기", "Close")}
           </Button>
           <Button
             onClick={handleCallPhone}
@@ -527,7 +540,7 @@ const HeroSection = () => {
             type="button"
             aria-label="051-507-7000번으로 전화 걸기"
           >
-            전화걸기
+            {getLanguageText("전화걸기", "Call Now")}
           </Button>
         </DialogActions>
       </Dialog>

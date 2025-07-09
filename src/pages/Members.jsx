@@ -1,33 +1,50 @@
 import { Typography, Box, Paper } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { useTheme } from "@mui/material/styles";
+import { getCurrentLanguage, getLanguageText } from "../utils/language";
 
 const Members = () => {
   const theme = useTheme();
+  const currentLang = getCurrentLanguage();
   //   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const members = [
     {
-      name: "이태환 \n대표 변호사",
+      name: getLanguageText(
+        "이태환 \n대표 변호사",
+        "Lee Taehwan \nSenior Partner"
+      ),
       img: "/lawyer_lee.png",
-      description:
+      description: getLanguageText(
         "사법시험 35회, 연수원 25기, \n민사·형사·가사·건설·손해배상 분야 전문",
+        "Bar Exam 35th, Judicial Research and Training Institute 25th, \nSpecializing in Civil, Criminal, Family, Construction, and Damages"
+      ),
     },
     {
-      name: "최현우 \n변호사",
+      name: getLanguageText("최현우 \n변호사", "Choi Hyeonwoo \nAttorney"),
       img: "/lawyer_choi.png",
-      description: "사법시험 37회, 연수원 27기",
+      description: getLanguageText(
+        "사법시험 37회, 연수원 27기",
+        "Bar Exam 37th, Judicial Research and Training Institute 27th"
+      ),
     },
     {
-      name: "김충희 \n변호사",
+      name: getLanguageText("김충희 \n변호사", "Kim Chunghee \nAttorney"),
       img: "/lawyer_kim.png",
-      description: "사법시험 37회, 연수원 27기",
+      description: getLanguageText(
+        "사법시험 37회, 연수원 27기",
+        "Bar Exam 37th, Judicial Research and Training Institute 27th"
+      ),
     },
     {
-      name: "배경렬 \n변호사",
+      name: getLanguageText("배경렬 \n변호사", "Bae Gyeongryeol \nAttorney"),
       img: "/lawyer_bae.jpg",
-      description: "사법시험 44회, 연수원 34기",
+      description: getLanguageText(
+        "사법시험 44회, 연수원 34기",
+        "Bar Exam 44th, Judicial Research and Training Institute 34th"
+      ),
     },
   ];
+
   return (
     <CommonContainer
       sx={{
