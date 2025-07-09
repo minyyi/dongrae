@@ -41,7 +41,8 @@ const Footer = () => {
           >
             <img
               src="/logo.png"
-              alt="logo"
+              alt="부산 법무법인 동래 로고"
+              itemProp="logo"
               style={{
                 width: "120px",
                 height: "92px",
@@ -112,7 +113,7 @@ const Footer = () => {
               }}
             >
               <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                Copyright 2025. dongrae. All right reserved
+                Copyright 2025. min. All right reserved
               </Typography>
             </Box>
           </Box>
