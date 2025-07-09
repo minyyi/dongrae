@@ -296,8 +296,8 @@ const HeroSection = () => {
             ⚖
           </div>
           <Typography
+            component="h1"
             variant="h5"
-            component="h2"
             sx={{
               fontWeight: 300,
               color: "#d4af37",
@@ -309,8 +309,8 @@ const HeroSection = () => {
         </Box>
 
         <Typography
-          variant="h3"
-          component="h1"
+          variant="h2"
+          component="h2"
           className="main-title"
           sx={{
             fontSize: { xs: "2.5rem", md: "3.5rem" },
@@ -329,7 +329,7 @@ const HeroSection = () => {
 
         <Typography
           variant="body1"
-          component="p"
+          component="h3"
           className="subtitle"
           sx={{
             fontSize: { xs: "1.2rem", md: "1.4rem" },

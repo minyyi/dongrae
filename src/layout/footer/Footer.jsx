@@ -18,6 +18,7 @@ const Footer = () => {
       <Box
         sx={{
           backgroundColor: "#d7ccc8",
+          pt: 4,
           // mt: 6,
           //   opacity: 0.2,
         }}
