@@ -4,9 +4,14 @@ import CommonContainer from "../components/CommonContainer";
 const Info = () => {
   return (
     <CommonContainer>
-      <Typography variant="h4">법률, 그 이상의 가치를 추구합니다</Typography>
+      <Typography component="h1" variant="h4">
+        법률, 그 이상의 가치를 추구합니다
+      </Typography>
       <br />
-      <Typography sx={{ fontSize: "1.2rem", whiteSpace: "pre-line" }}>
+      <Typography
+        component="h2"
+        sx={{ fontSize: "1.2rem", whiteSpace: "pre-line" }}
+      >
         법무법인 동래는 1995년 부산에 설립되어 지역 밀착형 법률 서비스를
         제공하고 있는 중소규모 로펌입니다.
         <br />

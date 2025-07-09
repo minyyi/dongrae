@@ -60,8 +60,8 @@ const NavBar = () => {
               }}
             />
             <Typography
-              variant="h6"
               component="div"
+              variant="h6"
               sx={{
                 flexGrow: 1,
                 ml: 2,
