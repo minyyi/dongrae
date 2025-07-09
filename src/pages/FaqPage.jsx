@@ -2,9 +2,12 @@
 import { useEffect } from "react";
 import CommonContainer from "../components/CommonContainer";
 import { Typography, Box } from "@mui/material";
-import FaqTable, { faqData } from "../components/FaqTable"; // faqData import 추가
+import FaqTable, { faqData, faqDataEn } from "../components/FaqTable";
+import { getCurrentLanguage, getLanguageText } from "../utils/language";
 
 const FaqPage = () => {
+  const currentLang = getCurrentLanguage();
+  const currentFaqData = currentLang === "en" ? faqDataEn : faqData;
   // JSON-LD 스키마 추가
   useEffect(() => {
     const faqJsonLd = {
@@ -36,21 +39,24 @@ const FaqPage = () => {
         }
       });
     };
-  }, []);
+  }, [currentFaqData]);
 
   return (
     <CommonContainer>
       <Typography component="h1" variant="h4">
-        자주 묻는 질문 (FAQ)
+        {getLanguageText("자주 묻는 질문", "Frequently Asked Questions")}
       </Typography>
       <br />
       <Typography
         component="h2"
         sx={{ fontSize: "1.2rem", whiteSpace: "pre-line" }}
       >
-        부산 법무법인 동래에 대해 자주 묻는 질문과 답변을 확인하세요.
-        <br />
-        형사사건, 민사소송, 법률상담 관련 궁금한 점을 해결해드립니다.
+        {getLanguageText(
+          `부산 법무법인 동래에 대해 자주 묻는 질문과 답변을 확인하세요.
+형사사건, 민사소송, 법률상담 등 관련 궁금한 점을 해결해드립니다.`,
+          `Check out frequently asked questions and answers about Dongrae Law Firm in Busan.
+We solve your questions related to criminal cases, civil litigation, and legal consultation.`
+        )}
       </Typography>
       <Box>
         <FaqTable />

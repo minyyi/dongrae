@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { getCurrentLanguage, getLanguageText } from "../utils/language";
 
 const Row = (props) => {
   const { row, index } = props;
@@ -68,7 +69,7 @@ const Row = (props) => {
                 gutterBottom
                 sx={{ color: "#3A6D8C", mb: 1, fontSize: "1rem" }}
               >
-                답변
+                {getLanguageText("답변", "Answer")}
               </Typography>
               <Typography
                 variant="body1"
@@ -192,7 +193,33 @@ export const faqData = [
   },
 ];
 
+export const faqDataEn = [
+  {
+    Q: "What is the difference between accusation and denunciation?",
+    A: "An accusation is when a person with the right to accuse, namely the 'victim who suffered from the crime' or 'a person with a certain relationship with the victim,' reports criminal facts to investigative agencies (prosecutors, police, labor inspectors, etc.) to seek punishment of the perpetrator.\n\nA denunciation is when someone other than the accuser and the perpetrator reports criminal facts to investigative agencies and expresses their intention to seek punishment of the perpetrator. A simple damage report cannot constitute a denunciation.\n\nSimply put, an accusation is made directly by the victim or accuser of a criminal case, while a denunciation is made by a third party.",
+  },
+  {
+    Q: "How does criminal litigation proceed?",
+    A: "Criminal litigation generally proceeds in the following steps:\n\n1. Investigation stage: Investigation by police or prosecutors\n2. Indictment stage: Prosecutor's decision on whether to indict\n3. Trial stage: Court proceedings\n4. Judgment stage: Court's final judgment\n\nAt each stage, the rights of suspects/defendants are guaranteed, and they have the right to legal assistance.",
+  },
+  {
+    Q: "What exactly is the difference between a suspect and a defendant?",
+    A: "The differences between suspects and defendants are as follows:\n\n• Suspect: A person who becomes the subject of investigation by investigative agencies (police, prosecutors)\n• Defendant: A person who is indicted by prosecutors and stands trial in court\n\nIn other words, they are called 'suspects' during the investigation stage and 'defendants' during the trial stage.",
+  },
+  {
+    Q: "What legal services do you provide?",
+    A: "Dongrae Law Firm provides comprehensive legal services including:\n\n• Civil Litigation: Contract disputes, damages, real estate disputes\n• Criminal Defense: Criminal case defense, arrest warrant response\n• Corporate Law: Contract drafting, legal consultation, corporate consulting\n• Family Law: Divorce, custody, inheritance matters\n• Real Estate Law: Property transactions, disputes, registration\n\nWe serve clients throughout Busan Metropolitan City with experienced attorneys.",
+  },
+  {
+    Q: "How can I schedule a consultation?",
+    A: "You can schedule a consultation through the following methods:\n\n• Phone: Call 051-507-7000 during business hours\n• Online: Submit a consultation request through our website\n• Visit: Walk-in consultations available during office hours\n\nOffice Hours: Monday to Friday, 9:00 AM to 6:00 PM\nLocation: Seheon Building 5F, 1490-3 Geoje 1-dong, Yeonje-gu, Busan\n\nInitial consultations are free of charge.",
+  },
+];
+
 const FaqTable = () => {
+  const currentLang = getCurrentLanguage();
+  const currentFaqData = currentLang === "en" ? faqDataEn : faqData;
+
   return (
     <section aria-labelledby="faq-heading">
       <TableContainer
@@ -203,7 +230,7 @@ const FaqTable = () => {
           boxShadow: 2,
         }}
       >
-        <Table aria-label="자주 묻는 질문 테이블">
+        <Table aria-label="faq table">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
               <TableCell sx={{ width: 50 }} />
@@ -220,7 +247,7 @@ const FaqTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {faqData.map((faq, index) => (
+            {currentFaqData.map((faq, index) => (
               <Row key={index} row={faq} index={index} />
             ))}
           </TableBody>
