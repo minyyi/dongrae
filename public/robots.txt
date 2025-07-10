@@ -17,7 +17,8 @@ Disallow: /404
 Disallow: /error
 
 # Sitemap location
-Sitemap: https://www.dongraelaw.shop/sitemap.xml
+Sitemap: https://ko.dongraelaw.shop/sitemap.xml
+Sitemap: https://en.dongraelaw.shop/sitemap.xml
 
 # Google bot settings
 User-agent: Googlebot
