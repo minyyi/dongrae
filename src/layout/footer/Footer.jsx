@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import { IoLogoYoutube } from "react-icons/io";
 // import { IoLogoInstagram } from "react-icons/io";
 import { useTheme } from "@mui/material/styles";
+import { getLanguageText } from "../../utils/language";
 
 const Footer = () => {
   const theme = useTheme();
@@ -38,6 +39,10 @@ const Footer = () => {
           <Box
             sx={{ display: "flex", cursor: "pointer", flexDirection: "column" }}
             onClick={clickLogo}
+            aria-label={getLanguageText(
+              "법무법인 동래 메인페이지로 이동",
+              "Go to Dongrae Law Firm main page"
+            )}
           >
             <img
               src="/logo.png"
@@ -62,10 +67,17 @@ const Footer = () => {
               }}
             >
               <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                10:00 ~ 17:30 (점심시간 12:00 ~ 13:00)
+                <strong>{getLanguageText("운영시간:", "Office Hours:")}</strong>{" "}
+                {getLanguageText(
+                  "평일 10:00 ~ 17:30 (점심시간 12:00 ~ 13:00)",
+                  "Mon-Fri 10:00 ~ 17:30 (Lunch 12:00 ~ 13:00)"
+                )}
               </Typography>
               <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                토/일/공휴일 휴무
+                {getLanguageText(
+                  "토/일/공휴일 휴무",
+                  "Closed on weekends and holidays"
+                )}
               </Typography>
             </Box>
 
@@ -79,10 +91,24 @@ const Footer = () => {
               }}
             >
               <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                계좌정보:하나은행 309-9101-***
+                <strong>{getLanguageText("계좌:", "Account:")}</strong>{" "}
+                {getLanguageText(
+                  "하나은행 309-9101-***",
+                  "Hana Bank 309-9101-***"
+                )}
               </Typography>
-              <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                주소: 부산 연제구 거제1동 1490‑3 세헌빌딩 5층
+              <Typography
+                sx={{ fontSize: { md: 14, xs: 12 } }}
+                aria-label={getLanguageText(
+                  "법무법인 주소",
+                  "Law firm address"
+                )}
+              >
+                <strong>{getLanguageText("주소:", "Address:")}</strong>{" "}
+                {getLanguageText(
+                  "부산광역시 연제구 거제1동 1490‑3 세헌빌딩 5층",
+                  "Seheon Building 5F, 1490-3 Geoje 1-dong, Yeonje-gu, Busan"
+                )}
               </Typography>
             </Box>
             {/* 개인정보처리/이용약관/가맹점 */}
@@ -95,15 +121,22 @@ const Footer = () => {
                 textDecoration: "none",
               }}
             >
-              <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                개인정보처리방침
+              <Typography
+                sx={{ fontSize: { md: 14, xs: 12 } }}
+                aria-label={getLanguageText(
+                  "개인정보처리방침",
+                  "Privacy Policy"
+                )}
+              ></Typography>
+              <Typography
+                sx={{ fontSize: { md: 14, xs: 12 } }}
+                aria-label={getLanguageText("이용약관", "Terms of Service")}
+              >
+                {getLanguageText("이용약관", "Terms of Service")}{" "}
               </Typography>
-              <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                이용약관
-              </Typography>
-              <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
+              {/* <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
                 가맹점 고지사항
-              </Typography>
+              </Typography> */}
             </Box>
             <Box
               sx={{
@@ -112,8 +145,17 @@ const Footer = () => {
                 alignItems: "center",
               }}
             >
-              <Typography sx={{ fontSize: { md: 14, xs: 12 } }}>
-                Copyright 2025. min. All right reserved
+              <Typography
+                sx={{ fontSize: { md: 14, xs: 12 } }}
+                aria-label={getLanguageText(
+                  "저작권 정보",
+                  "Copyright information"
+                )}
+              >
+                {getLanguageText(
+                  "© 2025 법무법인 동래. All rights reserved.",
+                  "© 2025 Dongrae Law Firm. All rights reserved."
+                )}
               </Typography>
             </Box>
           </Box>
@@ -126,7 +168,15 @@ const Footer = () => {
               rowGap: 1,
             }}
           >
-            <Typography sx={{ fontSize: 20 }}>051‑507‑7000</Typography>
+            <Typography
+              sx={{ fontSize: 20 }}
+              aria-label={getLanguageText(
+                "051-507-7000번으로 전화걸기",
+                "Call 051-507-7000"
+              )}
+            >
+              051‑507‑7000
+            </Typography>
             <Box
               sx={{
                 display: "flex",

@@ -2,8 +2,11 @@ import { Typography, Box, Paper } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { useTheme } from "@mui/material/styles";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
+import usePageSEO from "../utils/usePageSEO";
 
 const Members = () => {
+  usePageSEO("/members");
+
   const theme = useTheme();
   const currentLang = getCurrentLanguage();
   //   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

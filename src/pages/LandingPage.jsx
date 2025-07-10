@@ -10,6 +10,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
+import usePageSEO from "../utils/usePageSEO";
 
 // 완전히 새로운 스타일 컴포넌트들 (DOM에 불필요한 props 전달 방지)
 const GeometricShape = styled("div", {
@@ -89,6 +90,7 @@ const generateFixedParticles = () => {
 };
 
 const HeroSection = () => {
+  usePageSEO("/");
   const currentLang = getCurrentLanguage();
 
   useEffect(() => {
