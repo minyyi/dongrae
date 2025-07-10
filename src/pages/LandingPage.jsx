@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   Typography,
@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
 import usePageSEO from "../utils/usePageSEO";
+import useMetaTags from "../utils/useMetaTags";
 
-// 완전히 새로운 스타일 컴포넌트들 (DOM에 불필요한 props 전달 방지)
 const GeometricShape = styled("div", {
   shouldForwardProp: (prop) =>
     ![
@@ -90,8 +90,20 @@ const generateFixedParticles = () => {
 };
 
 const HeroSection = () => {
-  usePageSEO("/");
   const currentLang = getCurrentLanguage();
+  usePageSEO("/");
+
+  useMetaTags({
+    titleKo: "부산 법무법인 동래 - 전문 법률 서비스",
+    titleEn: "Dongrae Law Firm Busan - Professional Legal Services",
+    descriptionKo:
+      "부산 소재 법무법인으로 민사, 형사, 가족법 등 다양한 법률 서비스를 제공합니다. 풍부한 경험과 전문성으로 고객의 권익을 보호합니다.",
+    descriptionEn:
+      "Professional law firm in Busan providing comprehensive legal services including civil, criminal, and family law with expertise and experience.",
+    keywords:
+      "법무법인 동래, 부산 변호사, 법률 서비스, 민사소송, 형사변호, Dongrae Law Firm, Busan lawyer",
+    pagePath: "/",
+  });
 
   useEffect(() => {
     const organizationSchema = {

@@ -3,13 +3,26 @@ import CommonContainer from "../components/CommonContainer";
 import { useTheme } from "@mui/material/styles";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
 import usePageSEO from "../utils/usePageSEO";
+import useMetaTags from "../utils/useMetaTags";
 
 const Members = () => {
   usePageSEO("/members");
 
+  useMetaTags({
+    titleKo: "변호사 소개 | 법무법인 동래 - 부산 전문 변호사",
+    titleEn: "Our Attorneys | Dongrae Law Firm - Busan Professional Lawyers",
+    descriptionKo:
+      "법무법인 동래의 전문 변호사진을 소개합니다. 이태환 대표변호사를 비롯한 경험 많은 변호사들이 최고의 법률 서비스를 제공합니다.",
+    descriptionEn:
+      "Meet the professional attorneys at Dongrae Law Firm. Led by senior partner Lee Taehwan, our experienced lawyers provide the best legal services.",
+    keywords:
+      "법무법인 동래 변호사, 이태환 변호사, 부산 전문 변호사, 변호사 소개, Dongrae Law Firm attorneys",
+    pagePath: "/members",
+  });
+
   const theme = useTheme();
-  const currentLang = getCurrentLanguage();
-  //   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // const currentLang = getCurrentLanguage();
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const members = [
     {
       name: getLanguageText(
