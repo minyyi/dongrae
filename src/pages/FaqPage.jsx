@@ -4,8 +4,10 @@ import CommonContainer from "../components/CommonContainer";
 import { Typography, Box } from "@mui/material";
 import FaqTable, { faqData, faqDataEn } from "../components/FaqTable";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
+import usePageSEO from "../utils/usePageSEO";
 
 const FaqPage = () => {
+  usePageSEO("/faq");
   const currentLang = getCurrentLanguage();
   const currentFaqData = currentLang === "en" ? faqDataEn : faqData;
   // JSON-LD 스키마 추가

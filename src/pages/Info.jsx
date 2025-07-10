@@ -1,8 +1,10 @@
 import { Typography } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { getLanguageText, getCurrentLanguage } from "../utils/language";
+import usePageSEO from "../utils/usePageSEO";
 
 const Info = () => {
+  usePageSEO("/info");
   const currentLang = getCurrentLanguage();
   return (
     <CommonContainer>
