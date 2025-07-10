@@ -2,10 +2,24 @@ import { Typography } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { getLanguageText, getCurrentLanguage } from "../utils/language";
 import usePageSEO from "../utils/usePageSEO";
+import useMetaTags from "../utils/useMetaTags";
 
 const Info = () => {
-  usePageSEO("/info");
   const currentLang = getCurrentLanguage();
+  usePageSEO("/info");
+
+  useMetaTags({
+    titleKo: "소개 | 법무법인 동래 - 부산 법무법인",
+    titleEn: "About Us | Dongrae Law Firm - Busan Law Office",
+    descriptionKo:
+      "1995년 부산에 설립된 법무법인 동래는 지역 밀착형 법률 서비스를 제공하는 중소규모 로펌입니다. 민·형사 및 건설·의료 등 다양한 분야를 다룹니다.",
+    descriptionEn:
+      "Dongrae Law Firm, established in Busan in 1995, is a small to medium-sized law firm providing community-focused legal services in various fields including civil, criminal, construction, and medical law.",
+    keywords:
+      "법무법인 동래 소개, 부산 법무법인, 회사 정보, 법률사무소, Dongrae Law Firm about",
+    pagePath: "/info",
+  });
+
   return (
     <CommonContainer>
       <Typography component="h1" variant="h4">

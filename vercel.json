@@ -3,6 +3,11 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": "vite",
+  "domains": [
+    "ko.dongraelaw.shop",
+    "en.dongraelaw.shop",
+    "www.dongraelaw.shop"
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
