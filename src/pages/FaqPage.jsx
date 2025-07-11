@@ -1,8 +1,8 @@
-// Faq.jsx - 수정된 버전
 import { useEffect } from "react";
 import CommonContainer from "../components/CommonContainer";
 import { Typography, Box } from "@mui/material";
-import FaqTable, { faqData, faqDataEn } from "../components/FaqTable";
+import FaqTable from "../components/FaqTable";
+import { faqDataKo, faqDataEn } from "../data/faqData";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
 import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
@@ -23,13 +23,14 @@ const FaqPage = () => {
     pagePath: "/faq",
   });
 
-  const currentFaqData = currentLang === "en" ? faqDataEn : faqData;
+  const currentFaqData = currentLang === "en" ? faqDataEn : faqDataKo;
+
   // JSON-LD 스키마 추가
   useEffect(() => {
     const faqJsonLd = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: faqData.map((faq) => ({
+      mainEntity: currentFaqData.map((faq) => ({
         "@type": "Question",
         name: faq.Q,
         acceptedAnswer: {
@@ -75,7 +76,7 @@ We solve your questions related to criminal cases, civil litigation, and legal c
         )}
       </Typography>
       <Box>
-        <FaqTable />
+        <FaqTable data={currentFaqData} />
       </Box>
     </CommonContainer>
   );
