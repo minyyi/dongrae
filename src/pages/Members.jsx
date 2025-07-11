@@ -31,7 +31,14 @@ const Members = () => {
       ),
       img: "/lawyer_lee.png",
       description: getLanguageText(
-        "사법시험 35회, 연수원 25기, \n민사·형사·가사·건설·손해배상 분야 전문 \n 부산대학교 대학원 석사 수료",
+        `사법시험 35회, 연수원 25기 
+        민사·형사·가사·건설·손해배상 분야 전문 
+        부산대학교 대학원 법학과 석사 수료 
+        부산시 남구 선거관리위원 
+        한국 전기 통신공사 법률고문 
+        선박통신사협회 법률고문 및 부산건축사회 자문 변호사  
+        가톨릭대학교 전임강사 
+        (주)삼지건설, (주)삼지종합건설, (주)대영교통 법률고문`,
         "Bar Exam 35th, Judicial Research and Training Institute 25th, \nSpecializing in Civil, Criminal, Family, Construction, and Damages"
       ),
     },
@@ -140,6 +147,7 @@ const Members = () => {
               textAlign: "center",
               px: 2,
               lineHeight: 1.6,
+              whiteSpace: "pre-line",
             }}
           >
             {member.description}
