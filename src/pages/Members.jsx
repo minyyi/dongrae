@@ -31,7 +31,7 @@ const Members = () => {
       ),
       img: "/lawyer_lee.png",
       description: getLanguageText(
-        "사법시험 35회, 연수원 25기, \n민사·형사·가사·건설·손해배상 분야 전문",
+        "사법시험 35회, 연수원 25기, \n민사·형사·가사·건설·손해배상 분야 전문 \n 부산대학교 대학원 석사 수료",
         "Bar Exam 35th, Judicial Research and Training Institute 25th, \nSpecializing in Civil, Criminal, Family, Construction, and Damages"
       ),
     },
@@ -47,7 +47,7 @@ const Members = () => {
       name: getLanguageText("김충희 \n변호사", "Kim Chunghee \nAttorney"),
       img: "/lawyer_kim.png",
       description: getLanguageText(
-        "사법시험 37회, 연수원 27기",
+        "사법시험 37회, 연수원 27기, 군법무관임용고시8회",
         "Bar Exam 37th, Judicial Research and Training Institute 27th"
       ),
     },
