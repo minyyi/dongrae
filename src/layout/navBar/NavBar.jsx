@@ -38,6 +38,10 @@ const NavBar = () => {
       name: getLanguageText("FAQ", "FAQ"),
       path: "/faq",
     },
+    {
+      name: getLanguageText("오시는길", "Contact Us"),
+      path: "/contactus",
+    },
   ];
 
   const handlePageClick = (path) => {
