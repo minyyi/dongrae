@@ -29,8 +29,23 @@ import {
   Business,
   Send,
 } from "@mui/icons-material";
+import usePageSEO from "../utils/usePageSEO";
+import useMetaTags from "../utils/useMetaTags";
 
 const ContactUs = () => {
+  usePageSEO("/contact");
+
+  useMetaTags({
+    titleKo: "연락처 | 법무법인 동래 - 부산 법률상담 문의",
+    titleEn: "Contact Us | Dongrae Law Firm - Busan Legal Consultation",
+    descriptionKo:
+      "법무법인 동래에 문의하세요. 부산광역시 연제구 법원남로 18 (세헌빌딩) 5층 위치, 전화 051-507-7000. 민사, 형사, 부동산 등 전문 법률상담을 제공합니다.",
+    descriptionEn:
+      "Contact Dongrae Law Firm. Located at 5F Seheon Building, 18 Beopwonnam-ro, Yeonje-gu, Busan. Phone: 051-507-7000. We provide professional legal consultation for civil, criminal, and real estate matters.",
+    keywords:
+      "법무법인 동래 연락처, 부산 변호사 문의, 법률상담 예약, 051-507-7000, 연제구 법무법인, 세헌빌딩, Dongrae Law Firm contact",
+    pagePath: "/contact",
+  });
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -268,8 +283,7 @@ const ContactUs = () => {
                   </Paper>
                   <Box
                     component="iframe"
-                    // 단순한 형태로 변경 (pp 파라미터 간소화)
-                    src="https://www.bing.com/maps/embed/viewer.aspx?v=3&cp=35.1756~129.0833&lvl=16&w=1200&h=400&sty=r&typ=d&pp=35.1756~129.0833&src=SHELL&form=BMEMJS"
+                    src="https://www.bing.com/maps/embed?h=400&w=1200&cp=35.1756~129.0833&lvl=17&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
                     sx={{
                       width: "100%",
                       height: 400,
@@ -320,6 +334,8 @@ const ContactUs = () => {
                     elevation={2}
                     sx={{
                       p: 3,
+                      width: "100%",
+                      flex: 1,
                       textAlign: "center",
                       borderLeft: "4px solid",
                       borderLeftColor: "primary.main",
