@@ -106,8 +106,8 @@ const Footer = () => {
               >
                 <strong>{getLanguageText("주소:", "Address:")}</strong>{" "}
                 {getLanguageText(
-                  "부산광역시 연제구 거제1동 1490‑3 세헌빌딩 5층",
-                  "Seheon Building 5F, 1490-3 Geoje 1-dong, Yeonje-gu, Busan"
+                  "부산광역시 연제구 거제1동 법원남로 18 (세헌빌딩) 5층",
+                  "Seheon Building 5F, 18, Beobwonnam-ro, Yeonje-gu, Busan"
                 )}
               </Typography>
             </Box>
