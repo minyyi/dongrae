@@ -36,7 +36,7 @@ const Members = () => {
         부산대학교 대학원 법학과 석사 수료 
         부산시 남구 선거관리위원 
         한국 전기 통신공사 법률고문 
-        선박통신사협회 법률고문 및 부산건축사회 자문 변호사  
+        선박통신사협회 및 부산건축사회 고문 변호사  
         가톨릭대학교 전임강사 
         (주)삼지건설, (주)삼지종합건설, (주)대영교통 법률고문`,
         "Bar Exam 35th, Judicial Research and Training Institute 25th, \nSpecializing in Civil, Criminal, Family, Construction, and Damages"

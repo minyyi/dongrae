@@ -9,7 +9,8 @@ const Layout = ({ children }) => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        minWidth: "100vw",
+        maxWidth: "100%",
+        width: "100vw",
       }}
     >
       <NavBar />
