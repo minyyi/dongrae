@@ -269,6 +269,7 @@ const HeroSection = () => {
       ref={heroRef}
       style={{
         height: "100vh",
+        width: "100vw",
         background:
           "linear-gradient(135deg, #1a2332 0%, #2c3e50 50%, #34495e 100%)",
         position: "relative",
