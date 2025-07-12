@@ -6,6 +6,7 @@ import { faqDataKo, faqDataEn } from "../data/faqData";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
 import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
+// import { categoryOrder, categoryOrderEn } from "../data/faqData";
 
 const FaqPage = () => {
   const currentLang = getCurrentLanguage();

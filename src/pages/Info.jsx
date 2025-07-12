@@ -1,4 +1,5 @@
 // Info.jsx - 한국어/영어 다국어 버전 (Experience 강화)
+import { useEffect } from "react"; // 추가
 import { Typography, Box, Paper, Grid, Chip } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { getLanguageText, getCurrentLanguage } from "../utils/language";
@@ -6,7 +7,8 @@ import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
 
 const Info = () => {
-  const currentLang = getCurrentLanguage();
+  const currentLang = getCurrentLanguage(); // 추가
+
   usePageSEO("/info");
 
   useMetaTags({
@@ -20,6 +22,97 @@ const Info = () => {
       "법무법인 동래 소개, 부산 30년 경력 변호사, 30000건 해결, 이태환 변호사, 사법시험 35회, 직접 상담, Dongrae Law Firm experience",
     pagePath: "/info",
   });
+
+  // 구조화된 데이터 추가 (원래 코드는 그대로 유지)
+  useEffect(() => {
+    const organizationSchema = {
+      "@context": "https://schema.org",
+      "@type": ["LegalService", "Organization"],
+      name: currentLang === "en" ? "Dongrae Law Firm" : "법무법인 동래",
+      foundingDate: "1995",
+      description:
+        currentLang === "en"
+          ? "Established in 1995 in Busan, with 30 years of experience solving over 30,000 legal cases."
+          : "1995년 부산에 설립되어 30년간 30,000여 건의 법률 사건을 해결한 경험을 보유한 지역 밀착형 법무법인입니다.",
+
+      url:
+        currentLang === "en"
+          ? "https://en.dongraelaw.shop"
+          : "https://ko.dongraelaw.shop",
+      numberOfEmployees: "4",
+
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: currentLang === "en" ? "Yeonje-gu" : "연제구",
+        addressRegion: currentLang === "en" ? "Busan" : "부산광역시",
+        addressCountry: "KR",
+      },
+
+      telephone: "+82-51-507-7000",
+
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        ratingCount: "500",
+        bestRating: "5.0",
+      },
+
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: currentLang === "en" ? "Legal Services" : "법률 서비스",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: currentLang === "en" ? "Construction Disputes" : "건설분쟁",
+              description:
+                currentLang === "en"
+                  ? "500+ cases solved with 92% success rate"
+                  : "500건+ 해결, 승소율 92%",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: currentLang === "en" ? "Civil Litigation" : "민사소송",
+              description:
+                currentLang === "en"
+                  ? "Comprehensive civil dispute resolution"
+                  : "종합적인 민사분쟁 해결",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: currentLang === "en" ? "Criminal Defense" : "형사변호",
+              description:
+                currentLang === "en"
+                  ? "Expert criminal defense with 800+ cases"
+                  : "800건+ 경험의 전문 형사변호",
+            },
+          },
+        ],
+      },
+
+      founder: {
+        "@type": "Person",
+        name: currentLang === "en" ? "Lee Taehwan" : "이태환",
+        jobTitle: currentLang === "en" ? "Senior Partner" : "대표변호사",
+      },
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(organizationSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      // cleanup
+    };
+  }, [currentLang]);
 
   return (
     <CommonContainer sx={{}}>
@@ -53,11 +146,11 @@ const Info = () => {
               {getLanguageText("직접 해결 사건", "Cases Solved")}
             </Typography>
             <Typography variant="h4" component="h4" sx={{ color: "white" }}>
-              3,000+
+              30,000+
             </Typography>
             <Typography
               variant="body2"
-              component="body1"
+              component="span"
               sx={{ color: "white" }}
             >
               {getLanguageText("1995년부터 현재까지", "Since 1995")}
@@ -76,7 +169,7 @@ const Info = () => {
             </Typography>
             <Typography
               variant="body2"
-              component="body1"
+              component="span"
               sx={{ color: "white" }}
             >
               {getLanguageText("직접 대면 상담", "Direct consultations")}
@@ -95,7 +188,7 @@ const Info = () => {
             </Typography>
             <Typography
               variant="body2"
-              component="body1"
+              component="span"
               sx={{ color: "white" }}
             >
               {getLanguageText("직접 현장 확인", "Direct site inspection")}
@@ -114,7 +207,7 @@ const Info = () => {
             </Typography>
             <Typography
               variant="body2"
-              component="body1"
+              component="span"
               sx={{ color: "white" }}
             >
               {getLanguageText("의뢰인 평가", "Client rating")}
@@ -175,32 +268,11 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "Won Major Construction Dispute (5B KRW)"
                 )}
               </Typography>
-              <Typography variant="body2" sx={{ mt: 1 }}>
+              <br />
+              <Typography variant="body2" component="span" sx={{ mt: 1 }}>
                 {getLanguageText(
                   "저희가 직접 현장을 수십 차례 방문하여 증거를 수집하고 전문가와 협력하여 승소 판결을 받았습니다.",
                   "We personally visited the site dozens of times to collect evidence and collaborated with experts to achieve a favorable verdict."
-                )}
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2 }}>
-              <Chip
-                label={getLanguageText("의료분쟁", "Medical Dispute")}
-                color="secondary"
-                size="small"
-                sx={{ mr: 1 }}
-              />
-              <Typography variant="body2" component="span" fontWeight={600}>
-                {getLanguageText(
-                  "의료사고 집단소송 조정 성공 (15명 구제)",
-                  "Successful Mediation of Medical Malpractice Class Action (15 victims compensated)"
-                )}
-              </Typography>
-              <Typography variant="body2" sx={{ mt: 1 }}>
-                {getLanguageText(
-                  "각 피해자를 직접 만나 상담하고 의료진과 협의하여 원만한 해결을 이끌어냈습니다.",
-                  "We met with each victim personally and negotiated with medical staff to reach an amicable resolution."
                 )}
               </Typography>
             </Box>
@@ -219,7 +291,8 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "Not Guilty Verdict in Corporate Embezzlement Case"
                 )}
               </Typography>
-              <Typography variant="body2" sx={{ mt: 1 }}>
+              <br />
+              <Typography variant="body2" component="span" sx={{ mt: 1 }}>
                 {getLanguageText(
                   "수개월간 직접 증거를 분석하고 법정에서 변론하여 무죄 판결을 획득했습니다.",
                   "We spent months analyzing evidence directly and arguing in court to secure a not guilty verdict."
@@ -241,7 +314,8 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "Won All Real Estate Boundary Disputes"
                 )}
               </Typography>
-              <Typography variant="body2" sx={{ mt: 1 }}>
+              <br />
+              <Typography variant="body2" component="span" sx={{ mt: 1 }}>
                 {getLanguageText(
                   "측량사와 함께 현장을 직접 조사하고 관련 서류를 면밀히 검토하여 해결했습니다.",
                   "We worked with surveyors to directly investigate the sites and thoroughly reviewed related documents to resolve the cases."
@@ -286,7 +360,7 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "💼 Direct On-Site Response"
                 )}
               </Typography>
-              <Typography variant="body2" component="body2">
+              <Typography variant="body2" component="p">
                 {getLanguageText(
                   `• 매월 20회 이상 현장 직접 방문
 • 의뢰인과 함께 현장 조사 실시  
@@ -315,12 +389,12 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "🎯 Specialized Field Experience"
                 )}
               </Typography>
-              <Typography variant="body2" component="body2">
+              <Typography variant="body2" component="p">
                 {getLanguageText(
                   `• 건설분쟁: 500건+ (승소율 92%)
-• 의료분쟁: 200건+ (조정성공률 88%)
+• 보험사건: 200건+ 
 • 기업법무: 300건+ 자문 경험
-• 형사변호: 800건+ (무죄율 85%)`,
+• 형사변호: 800건+ `,
                   `• Construction disputes: 500+ cases (92% win rate)
 • Medical disputes: 200+ cases (88% mediation success)  
 • Corporate law: 300+ advisory cases
@@ -344,7 +418,7 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
                   "⚡ Rapid Problem Resolution"
                 )}
               </Typography>
-              <Typography variant="body2" component="body2">
+              <Typography variant="body2" component="p">
                 {getLanguageText(
                   `• 상담 후 24시간 내 초기 방향 제시
 • 긴급 사안 당일 대응
@@ -363,7 +437,7 @@ Senior Partner Lee Taehwan, who passed the 35th Bar Examination (25th class of J
 
       <Typography
         variant="body1"
-        component="body3"
+        component="p"
         sx={{ mt: 2, fontStyle: "italic", textAlign: "center" }}
       >
         {getLanguageText(

@@ -17,6 +17,7 @@ import Chip from "@mui/material/Chip";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { getCurrentLanguage, getLanguageText } from "../utils/language";
+import { categoryOrder, categoryOrderEn } from "../data/faqData";
 
 const Row = (props) => {
   const { row, index } = props;
@@ -123,6 +124,23 @@ const FaqTable = ({ data }) => {
   const [selectedCategory, setSelectedCategory] = React.useState("all");
   const itemsPerPage = 10;
 
+  const orderedCategories = React.useMemo(() => {
+    const currentOrder = currentLang === "en" ? categoryOrderEn : categoryOrder;
+    const availableCategories = [
+      ...new Set(data.map((faq) => faq.category).filter(Boolean)),
+    ];
+
+    // 정의된 순서대로 정렬하고, 정의되지 않은 카테고리는 마지막에 추가
+    const ordered = currentOrder.filter((cat) =>
+      availableCategories.includes(cat)
+    );
+    const unordered = availableCategories.filter(
+      (cat) => !currentOrder.includes(cat)
+    );
+
+    return [...ordered, ...unordered];
+  }, [data, currentLang]);
+
   // 카테고리별 필터링 (props 데이터 사용)
   const filteredData =
     selectedCategory === "all"
@@ -154,9 +172,10 @@ const FaqTable = ({ data }) => {
   }, [currentLang, data]);
 
   // 카테고리 목록 (props 데이터에서 추출)
-  const categories = [
-    ...new Set(data.map((faq) => faq.category).filter(Boolean)),
-  ];
+  const categories = orderedCategories;
+  // const categories = [
+  //   ...new Set(data.map((faq) => faq.category).filter(Boolean)),
+  // ];
 
   return (
     <section aria-labelledby="faq-heading">
@@ -173,15 +192,21 @@ const FaqTable = ({ data }) => {
               color={selectedCategory === "all" ? "primary" : "default"}
               variant={selectedCategory === "all" ? "filled" : "outlined"}
             />
-            {categories.map((category) => (
-              <Chip
-                key={category}
-                label={category}
-                onClick={() => handleCategoryChange(category)}
-                color={selectedCategory === category ? "primary" : "default"}
-                variant={selectedCategory === category ? "filled" : "outlined"}
-              />
-            ))}
+            {categories.map(
+              (
+                category // 이제 정렬된 순서로 표시됨
+              ) => (
+                <Chip
+                  key={category}
+                  label={category}
+                  onClick={() => handleCategoryChange(category)}
+                  color={selectedCategory === category ? "primary" : "default"}
+                  variant={
+                    selectedCategory === category ? "filled" : "outlined"
+                  }
+                />
+              )
+            )}
           </Box>
         </Box>
       )}

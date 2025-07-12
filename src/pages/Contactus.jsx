@@ -32,6 +32,70 @@ import {
 import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
 
+// 구조화된 데이터 컴포넌트
+const ContactStructuredData = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    name: "법무법인 동래",
+    description:
+      "부산 연제구 위치한 민사, 형사, 부동산 전문 법무법인. 1995년 설립, 30년 경력",
+    url: "https://dongraelaw.com",
+    telephone: "+82-51-507-7000",
+    email: "info@dongraelaw.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "법원남로 18 (세헌빌딩) 5층",
+      addressLocality: "연제구",
+      addressRegion: "부산광역시",
+      postalCode: "47508",
+      addressCountry: "KR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 35.1756,
+      longitude: 129.0833,
+    },
+    openingHours: "Mo-Fr 09:00-18:00",
+    areaServed: ["부산광역시", "경상남도", "울산광역시"],
+    serviceType: ["민사소송", "형사변호", "가사사건", "부동산", "기업법무"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "법률서비스",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "무료 법률상담",
+            description: "초기 상담 무료, 24시간 응급상담 가능",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "민사소송",
+            description: "부산 지역 민사분쟁 전문 해결",
+          },
+        },
+      ],
+    },
+    founder: {
+      "@type": "Person",
+      name: "이태환",
+      jobTitle: "대표변호사",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+};
+
 const ContactUs = () => {
   usePageSEO("/contact");
 
@@ -46,6 +110,7 @@ const ContactUs = () => {
       "법무법인 동래 연락처, 부산 변호사 문의, 법률상담 예약, 051-507-7000, 연제구 법무법인, 세헌빌딩, Dongrae Law Firm contact",
     pagePath: "/contact",
   });
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -109,6 +174,7 @@ const ContactUs = () => {
     setSnackbar({ ...snackbar, open: false });
   };
 
+  // AI가 이해하기 쉬운 자연어 형태로 개선 -> 원래대로 되돌림
   const contactInfo = [
     {
       icon: <LocationOn sx={{ fontSize: 48, color: "primary.main" }} />,
@@ -131,7 +197,7 @@ const ContactUs = () => {
     {
       icon: <Train sx={{ fontSize: 36, color: "primary.main" }} />,
       title: "지하철",
-      content: ["부산지하철 3호선 거제역", "7번 출구에서 도보 3분"],
+      content: ["부산지하철 3호선 거제역", "10번 출구에서 도보 3분"],
     },
     {
       icon: <DirectionsBus sx={{ fontSize: 36, color: "primary.main" }} />,
@@ -146,7 +212,7 @@ const ContactUs = () => {
     {
       icon: <Business sx={{ fontSize: 36, color: "primary.main" }} />,
       title: "주변 시설",
-      content: ["부산지방법원, 검찰청", "법조타운 내 위치"],
+      content: ["부산지방법원 도보 5분", "법조타운 내 위치"],
     },
   ];
 
@@ -160,341 +226,231 @@ const ContactUs = () => {
   ];
 
   return (
-    <Box sx={{ bgcolor: "background.default", minHeight: "100vh", py: 4 }}>
-      <Container maxWidth="lg">
-        {/* 헤더 섹션 */}
-        <Paper
-          elevation={0}
-          sx={{
-            background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
-            color: "white",
-            p: { xs: 4, md: 6 },
-            borderRadius: 3,
-            textAlign: "center",
-            mb: 4,
-          }}
-        >
-          <Typography variant="h3" component="h1" gutterBottom>
-            Contact Us
-          </Typography>
-          <Typography variant="h6" component="h2" sx={{ opacity: 0.9 }}>
-            법무법인 동래에 문의하세요
-          </Typography>
-        </Paper>
+    <>
+      {/* 구조화된 데이터 추가 */}
+      <ContactStructuredData />
 
-        {/* 연락처 정보 카드들 */}
-        <Grid
-          container
-          spacing={3}
-          sx={{ mb: 4, display: "flex", justifyContent: "center" }}
-        >
-          {contactInfo.map((info, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card
-                sx={{
-                  height: "100%",
-                  textAlign: "center",
-                  transition: "transform 0.2s ease-in-out",
-                  "&:hover": {
-                    transform: "translateY(-4px)",
-                  },
-                }}
-              >
-                <CardContent sx={{ p: 3 }}>
-                  <Box sx={{ mb: 2 }}>{info.icon}</Box>
-                  <Typography variant="h6" color="primary" gutterBottom>
-                    {info.title}
-                  </Typography>
-                  {info.content.map((text, idx) => (
-                    <Typography
-                      key={idx}
-                      variant="body1"
-                      gutterBottom={idx === 0}
-                    >
-                      {text}
-                    </Typography>
-                  ))}
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-
-        {/* 지도 섹션 */}
-        <Card sx={{ mb: 4 }}>
-          <CardContent sx={{ p: 0 }}>
-            <Box sx={{ p: 3, textAlign: "center" }}>
-              <Typography
-                variant="h4"
-                component="h3"
-                color="primary"
-                gutterBottom
-              >
-                오시는 길
-              </Typography>
-            </Box>
-
-            <Grid container sx={{ flexDirection: "column", gap: 4 }}>
-              <Grid item xs={12} md={6}>
-                <Box>
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      bgcolor: "primary.main",
-                      color: "white",
-                      p: 2,
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography variant="h6" component="h4" fontWeight="bold">
-                      Google Maps
-                    </Typography>
-                  </Paper>
-                  <Box
-                    component="iframe"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.0!2d129.0833!3d35.1756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEwJzMyLjIiTiAxMjnCsDA1JzAwLjAiRQ!5e0!3m2!1sko!2skr!4v1234567890&markers=color:red%7Clabel:L%7C35.1756,129.0833"
-                    sx={{
-                      width: "100%",
-                      height: 400,
-                      border: 0,
-                      display: "block",
-                    }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </Box>
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Box>
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      bgcolor: "primary.main",
-                      color: "white",
-                      p: 2,
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography variant="h6" component="h4" fontWeight="bold">
-                      Bing Maps
-                    </Typography>
-                  </Paper>
-                  <Box
-                    component="iframe"
-                    src="https://www.bing.com/maps/embed?h=400&w=1200&cp=35.1756~129.0833&lvl=17&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
-                    sx={{
-                      width: "100%",
-                      height: 400,
-                      border: 0,
-                      display: "block",
-                    }}
-                    allowFullScreen=""
-                    loading="lazy"
-                  />
-                </Box>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-
-        {/* 교통편 안내 */}
-        <Card sx={{ mb: 4, p: 4 }}>
-          <CardContent>
-            <Typography
-              variant="h4"
-              color="primary"
-              textAlign="center"
-              sx={{ mb: 3 }}
-              // gutterBottom
-            >
-              교통편 안내
+      <Box sx={{ bgcolor: "background.default", minHeight: "100vh", py: 4 }}>
+        <Container maxWidth="lg">
+          {/* 헤더 섹션 */}
+          <Paper
+            elevation={0}
+            sx={{
+              background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
+              color: "white",
+              p: { xs: 4, md: 6 },
+              borderRadius: 3,
+              textAlign: "center",
+              mb: 4,
+            }}
+          >
+            <Typography variant="h3" component="h1" gutterBottom>
+              Contact Us
             </Typography>
+            <Typography variant="h6" component="h2" sx={{ opacity: 0.9 }}>
+              법무법인 동래에 문의하세요
+            </Typography>
+          </Paper>
 
-            <Grid
-              container
-              spacing={3}
-              sx={{
-                mt: 2,
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              {transportInfo.map((transport, index) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  key={index}
-                  sx={{ display: "flex" }}
+          {/* 연락처 정보 카드들 */}
+          <Grid
+            container
+            spacing={3}
+            sx={{ mb: 4, display: "flex", justifyContent: "center" }}
+          >
+            {contactInfo.map((info, index) => (
+              <Grid item xs={12} md={4} key={index}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    textAlign: "center",
+                    transition: "transform 0.2s ease-in-out",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                    },
+                  }}
                 >
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      p: 3,
-                      width: "100%",
-                      flex: 1,
-                      textAlign: "center",
-                      borderLeft: "4px solid",
-                      borderLeftColor: "primary.main",
-                      bgcolor: "#f8f9fa",
-                      height: "100%",
-                      transition: "transform 0.2s ease-in-out",
-                      "&:hover": {
-                        transform: "translateY(-2px)",
-                      },
-                    }}
-                  >
-                    <Box sx={{ mb: 1 }}>{transport.icon}</Box>
-                    <Typography variant="h6" color="primary" gutterBottom>
-                      {transport.title}
+                  <CardContent sx={{ p: 3 }}>
+                    <Box sx={{ mb: 2 }}>{info.icon}</Box>
+                    <Typography
+                      variant="h6"
+                      component="h3"
+                      color="primary"
+                      gutterBottom
+                    >
+                      {info.title}
                     </Typography>
-                    {transport.content.map((text, idx) => (
+                    {info.content.map((text, idx) => (
                       <Typography
                         key={idx}
-                        variant="body2"
+                        variant="body1"
+                        component="p"
                         gutterBottom={idx === 0}
                       >
                         {text}
                       </Typography>
                     ))}
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </CardContent>
-        </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
 
-        {/* 문의 폼 */}
-        {/* <Card>
-          <CardContent sx={{ p: 4 }}>
-            <Typography
-              variant="h4"
-              color="primary"
-              textAlign="center"
-              gutterBottom
-            >
-              온라인 문의
-            </Typography>
+          {/* 지도 섹션 */}
+          <Card sx={{ mb: 4 }}>
+            <CardContent sx={{ p: 0 }}>
+              <Box sx={{ p: 3, textAlign: "center" }}>
+                <Typography
+                  variant="h4"
+                  component="h2"
+                  color="primary"
+                  gutterBottom
+                >
+                  오시는 길
+                </Typography>
+              </Box>
 
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="성함"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange("name")}
-                    required
-                    variant="outlined"
-                  />
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="연락처"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleInputChange("phone")}
-                    required
-                    variant="outlined"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="이메일"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange("email")}
-                    required
-                    variant="outlined"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <FormControl fullWidth required>
-                    <InputLabel>문의 분야</InputLabel>
-                    <Select
-                      value={formData.subject}
-                      label="문의 분야"
-                      onChange={handleInputChange("subject")}
-                    >
-                      {subjectOptions.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="문의 내용"
-                    name="message"
-                    multiline
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleInputChange("message")}
-                    placeholder="문의하실 내용을 자세히 적어주세요."
-                    required
-                    variant="outlined"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      size="large"
-                      startIcon={<Send />}
+              <Grid container sx={{ flexDirection: "column", gap: 4 }}>
+                <Grid item xs={12} md={6}>
+                  <Box>
+                    <Paper
+                      elevation={0}
                       sx={{
-                        minWidth: 200,
-                        py: 1.5,
-                        background:
-                          "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
-                        "&:hover": {
-                          background:
-                            "linear-gradient(135deg, #0f1b36 0%, #1e3c72 100%)",
-                        },
+                        bgcolor: "primary.main",
+                        color: "white",
+                        p: 2,
+                        textAlign: "center",
                       }}
                     >
-                      문의하기
-                    </Button>
+                      <Typography variant="h6" component="h3" fontWeight="bold">
+                        Google Maps
+                      </Typography>
+                    </Paper>
+                    <Box
+                      component="iframe"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.0!2d129.0833!3d35.1756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEwJzMyLjIiTiAxMjnCsDA1JzAwLjAiRQ!5e0!3m2!1sko!2skr!4v1234567890&markers=color:red%7Clabel:L%7C35.1756,129.0833"
+                      sx={{
+                        width: "100%",
+                        height: 400,
+                        border: 0,
+                        display: "block",
+                      }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <Box>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        bgcolor: "primary.main",
+                        color: "white",
+                        p: 2,
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography variant="h6" component="h3" fontWeight="bold">
+                        Bing Maps
+                      </Typography>
+                    </Paper>
+                    <Box
+                      component="iframe"
+                      src="https://www.bing.com/maps/embed?h=400&w=1200&cp=35.1756~129.0833&lvl=17&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
+                      sx={{
+                        width: "100%",
+                        height: 400,
+                        border: 0,
+                        display: "block",
+                      }}
+                      allowFullScreen=""
+                      loading="lazy"
+                    />
                   </Box>
                 </Grid>
               </Grid>
-            </Box>
-          </CardContent>
-        </Card> */}
+            </CardContent>
+          </Card>
 
-        {/* 스낵바 알림 */}
-        {/* <Snackbar
-          open={snackbar.open}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity={snackbar.severity}
-            sx={{ width: "100%" }}
-          >
-            {snackbar.message}
-          </Alert>
-        </Snackbar> */}
-      </Container>
-    </Box>
+          {/* 교통편 안내 */}
+          <Card sx={{ mb: 4, p: 4 }}>
+            <CardContent>
+              <Typography
+                variant="h4"
+                component="h3"
+                color="primary"
+                textAlign="center"
+                sx={{ mb: 3 }}
+              >
+                교통편 안내
+              </Typography>
+
+              <Grid
+                container
+                spacing={3}
+                sx={{
+                  mt: 2,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {transportInfo.map((transport, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                    key={index}
+                    sx={{ display: "flex" }}
+                  >
+                    <Paper
+                      elevation={2}
+                      sx={{
+                        p: 3,
+                        width: "100%",
+                        flex: 1,
+                        textAlign: "center",
+                        borderLeft: "4px solid",
+                        borderLeftColor: "primary.main",
+                        bgcolor: "#f8f9fa",
+                        height: "100%",
+                        transition: "transform 0.2s ease-in-out",
+                        "&:hover": {
+                          transform: "translateY(-2px)",
+                        },
+                      }}
+                    >
+                      <Box sx={{ mb: 1 }}>{transport.icon}</Box>
+                      <Typography
+                        variant="h6"
+                        component="h4"
+                        color="primary"
+                        gutterBottom
+                      >
+                        {transport.title}
+                      </Typography>
+                      {transport.content.map((text, idx) => (
+                        <Typography
+                          key={idx}
+                          variant="body2"
+                          component="p"
+                          gutterBottom={idx === 0}
+                        >
+                          {text}
+                        </Typography>
+                      ))}
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </CardContent>
+          </Card>
+        </Container>
+      </Box>
+    </>
   );
 };
 
