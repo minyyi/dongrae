@@ -1,4 +1,67 @@
+export const categoryOrder = [
+  "일반", // General (우선)
+  "상담/비용", // Consultation/Fees (우선)
+  "연락처/위치", // Contact/Location (우선)
+  "전문분야", // Practice Areas (우선)
+  "형사법", // Criminal Law
+  "부동산법", // Real Estate Law
+  "가족법", // Family Law
+  "행정법", // Administrative Law
+  "성범죄", // Sex Crimes
+  "명예훼손", // Defamation
+  "상속", // Inheritance
+  "이혼", // Divorce
+  "재건축심", // Reconstruction Review
+  "재개발재건축", // Redevelopment/Reconstruction
+  "건설하도급", // Construction Subcontracting
+  "파산회생", // Bankruptcy/Rehabilitation
+  "해외업무", // International Affairs
+  "명도임대차", // Eviction/Lease
+  "부동산", // Real Estate
+  "민사법", // Civil Law
+  "법무서비스", // Legal Services
+  "절차", // Procedures
+  "기타", // Others
+];
+
+// 카테고리 순서 정의 - 영어
+export const categoryOrderEn = [
+  "General", // 일반 (우선)
+  "Consultation/Fees", // 상담/비용 (우선)
+  "Contact/Location", // 연락처/위치 (우선)
+  "Practice Areas", // 전문분야 (우선)
+  "Criminal Law", // 형사법
+  "Real Estate Law", // 부동산법
+  "Family Law", // 가족법
+  "Administrative Law", // 행정법
+  "Sex Crimes", // 성범죄
+  "Defamation", // 명예훼손
+  "Inheritance", // 상속
+  "Divorce", // 이혼
+  "Reconstruction Review", // 재건축심
+  "Redevelopment/Reconstruction", // 재개발재건축
+  "Construction Subcontracting", // 건설하도급
+  "Bankruptcy/Rehabilitation", // 파산회생
+  "International Affairs", // 해외업무
+  "Eviction/Lease", // 명도임대차
+  "Real Estate", // 부동산
+  "Civil Law", // 민사법
+  "Legal Services", // 법무서비스
+  "Procedures", // 절차
+  "Others", // 기타
+];
+
 export const faqDataKo = [
+  {
+    category: "일반",
+    Q: "법무법인에서는 어떤 사건을 처리하나요?",
+    A: "민사, 형사, 가사, 행정 등 모든 분야의 법률사건을 처리합니다.",
+  },
+  {
+    category: "일반",
+    Q: "변호사 선임 비용은 어떻게 되나요?",
+    A: "사건의 성격과 난이도에 따라 다르며, 상담 시 자세히 안내해드립니다.",
+  },
   {
     category: "형사법",
     Q: "고소와 고발의 차이점이 무엇인가요?",
@@ -23,6 +86,26 @@ export const faqDataKo = [
     category: "행정법",
     Q: "집행정지 신청이란?",
     A: "집행정지 신청은 행정처분의 효력이나 집행을 일시적으로 중단시키는 제도입니다:\n\n신청 요건:\n• 행정소송이 계속 중일 것\n• 처분 등의 집행으로 인해 회복하기 어려운 손해가 생길 우려\n• 본안승소 가능성이 있을 것\n• 공공복리에 중대한 영향을 미치지 않을 것\n\n집행정지의 효과:\n• 행정처분의 집행이 중단됨\n• 의무이행명령의 경우 이행의무가 정지됨\n• 임시적 효력이므로 본안 판결까지만 유효\n\n신청 시점:\n• 행정소송 제기와 동시에 또는 소송 계속 중\n• 긴급한 경우 본안소송 제기 전에도 가능\n\n집행정지는 전문적 판단이 필요하므로 변호사 조력을 받으시기 바랍니다.",
+  },
+  {
+    category: "연락처/위치",
+    Q: "부산에서 변호사를 찾고 있는데 법무법인 동래는 어디에 있나요?",
+    A: "부산 지하철 3호선 거제역 10번 출구에서 도보 3분 거리에 있습니다. 부산지방법원 바로 인근 세헌빌딩 5층에 위치해 있어 법원 업무도 신속하게 처리할 수 있습니다. 정확한 주소는 부산광역시 연제구 법원남로 18번지입니다.",
+  },
+  {
+    category: "상담/비용",
+    Q: "상담 비용은 얼마인가요? 초기 상담도 유료인가요?",
+    A: "초기 상담은 완전 무료입니다. 051-507-7000으로 전화주시면 언제든 상담 예약이 가능하며, 응급상황시에는 24시간 상담도 가능합니다. 사건 수임 시에도 성공보수제나 분할납부 등 다양한 옵션을 제공합니다.",
+  },
+  {
+    category: "전문분야",
+    Q: "법무법인 동래는 어떤 분야를 전문으로 하시나요?",
+    A: "민사소송, 형사변호, 가사사건, 부동산, 건설분쟁, 의료사고를 전문으로 합니다. 1995년 설립 이후 30년간 30,000여 건의 사건을 직접 해결한 풍부한 경험을 보유하고 있으며, 특히 부산 지역 특성을 잘 아는 변호사진이 최적의 결과를 이끌어냅니다.",
+  },
+  {
+    category: "연락처/위치",
+    Q: "주차는 가능한가요? 대중교통으로는 어떻게 가나요?",
+    A: "세헌빌딩 지하에 주차장이 있어 자차 이용이 편리합니다. 대중교통으로는 지하철 3호선 거제역이 가장 가깝고, 버스는 17번, 31번, 51번, 83번 등을 이용하시면 됩니다. 부산지방법원과 같은 법조타운 내에 위치해 있어 찾기 쉽습니다.",
   },
   {
     category: "성범죄",
@@ -412,6 +495,36 @@ export const faqDataKo = [
 ];
 
 export const faqDataEn = [
+  {
+    category: "General",
+    Q: "What types of cases does the law firm handle?",
+    A: "We handle all areas of legal cases including civil, criminal, family, and administrative law.",
+  },
+  {
+    category: "General",
+    Q: "How much does it cost to hire a lawyer?",
+    A: "Costs vary depending on the nature and complexity of the case. We provide detailed information during consultation.",
+  },
+  {
+    category: "Contact/Location",
+    Q: "I'm looking for a lawyer in Busan. Where is Dongrae Law Firm located?",
+    A: "We are located 3 minutes' walk from Exit 10 of Geoje Station on Busan Subway Line 3. We are located on the 5th floor of Seheon Building, right next to Busan District Court, so we can handle court business quickly. The exact address is 18 Beopwonnam-ro, Yeonje-gu, Busan.",
+  },
+  {
+    category: "Consultation/Fees",
+    Q: "How much does consultation cost? Is the initial consultation also paid?",
+    A: "Initial consultation is completely free. You can make an appointment anytime by calling 051-507-7000, and 24-hour consultation is available for emergency situations. We also offer various options such as success fees and installment payments when taking on cases.",
+  },
+  {
+    category: "Practice Areas",
+    Q: "What areas does Dongrae Law Firm specialize in?",
+    A: "We specialize in civil litigation, criminal defense, family affairs, real estate, construction disputes, and medical accidents. Since our establishment in 1995, we have 30 years of experience directly resolving over 30,000 cases, and our attorneys who are well-versed in Busan regional characteristics deliver optimal results.",
+  },
+  {
+    category: "Contact/Location",
+    Q: "Is parking available? How can I get there by public transportation?",
+    A: "There is a parking lot in the basement of Seheon Building, making it convenient for car users. For public transportation, Geoje Station on Subway Line 3 is the closest, and you can take buses 17, 31, 51, 83, etc. It's easy to find as it's located in the same legal town as Busan District Court.",
+  },
   {
     category: "Criminal Law",
     Q: "What is the difference between accusation and denunciation?",

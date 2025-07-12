@@ -1,3 +1,4 @@
+import { useEffect } from "react"; // 추가 필요
 import { Typography, Box, Paper } from "@mui/material";
 import CommonContainer from "../components/CommonContainer";
 import { useTheme } from "@mui/material/styles";
@@ -6,6 +7,9 @@ import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
 
 const Members = () => {
+  const currentLang = getCurrentLanguage(); // 추가 필요
+  const theme = useTheme();
+
   usePageSEO("/members");
 
   useMetaTags({
@@ -20,9 +24,7 @@ const Members = () => {
     pagePath: "/members",
   });
 
-  const theme = useTheme();
-  // const currentLang = getCurrentLanguage();
-  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // 원래 members 배열 그대로 유지
   const members = [
     {
       name: getLanguageText(
@@ -67,6 +69,42 @@ const Members = () => {
       ),
     },
   ];
+
+  // 구조화된 데이터 추가 (원래 코드는 그대로 유지)
+  useEffect(() => {
+    const membersSchema = members.map((member) => ({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: member.name.replace(/\n/g, " "),
+      jobTitle:
+        member.name.includes("대표") || member.name.includes("Senior Partner")
+          ? currentLang === "en"
+            ? "Senior Partner"
+            : "대표변호사"
+          : currentLang === "en"
+          ? "Attorney"
+          : "변호사",
+      worksFor: {
+        "@type": "LegalService",
+        name: currentLang === "en" ? "Dongrae Law Firm" : "법무법인 동래",
+      },
+      description: member.description,
+      image: member.img,
+      knowsAbout:
+        currentLang === "en"
+          ? ["Civil Litigation", "Criminal Defense", "Family Law"]
+          : ["민사소송", "형사변호", "가사사건"],
+    }));
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(membersSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      // cleanup
+    };
+  }, [currentLang]);
 
   return (
     <CommonContainer
@@ -137,7 +175,6 @@ const Members = () => {
                 },
               }}
             >
-              {/* {isMobile ? member.name : member.name.replace(/\n/g, " ")} */}
               {member.name}
             </Typography>
           </Box>
