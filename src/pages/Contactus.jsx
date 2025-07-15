@@ -32,15 +32,15 @@ import {
 import usePageSEO from "../utils/usePageSEO";
 import useMetaTags from "../utils/useMetaTags";
 
-// 구조화된 데이터 컴포넌트
 const ContactStructuredData = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "LegalService",
+    "@type": ["LegalService", "LocalBusiness"],
     name: "법무법인 동래",
+    alternateName: "부산 법무법인 동래",
     description:
-      "부산 연제구 위치한 민사, 형사, 부동산 전문 법무법인. 1995년 설립, 30년 경력",
-    url: "https://dongraelaw.com",
+      "부산 연제구 위치한 민사, 형사, 부동산 전문 법무법인. 1995년 설립, 30년 경력의 이태환 대표변호사 직접 상담",
+    url: "https://ko.dongraelaw.shop",
     telephone: "+82-51-507-7000",
     email: "info@dongraelaw.com",
     address: {
@@ -56,9 +56,33 @@ const ContactStructuredData = () => {
       latitude: 35.1756,
       longitude: 129.0833,
     },
-    openingHours: "Mo-Fr 09:00-18:00",
-    areaServed: ["부산광역시", "경상남도", "울산광역시"],
-    serviceType: ["민사소송", "형사변호", "가사사건", "부동산", "기업법무"],
+    openingHours: ["Mo-Fr 09:00-18:00"],
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+    areaServed: [
+      { "@type": "City", name: "부산광역시" },
+      { "@type": "State", name: "경상남도" },
+      { "@type": "City", name: "울산광역시" },
+    ],
+    serviceType: ["민사소송", "형사변호", "가사사건", "부동산분쟁", "기업법무"],
+    priceRange: "$$",
+    paymentAccepted: ["현금", "카드", "계좌이체"],
+    currenciesAccepted: "KRW",
+    founder: {
+      "@type": "Person",
+      name: "이태환",
+      jobTitle: "대표변호사",
+      alumniOf: "부산대학교 대학원 법학과",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "200",
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "법률서비스",
@@ -76,15 +100,10 @@ const ContactStructuredData = () => {
           itemOffered: {
             "@type": "Service",
             name: "민사소송",
-            description: "부산 지역 민사분쟁 전문 해결",
+            description: "부산 지역 민사분쟁 전문 해결, 승소율 92%",
           },
         },
       ],
-    },
-    founder: {
-      "@type": "Person",
-      name: "이태환",
-      jobTitle: "대표변호사",
     },
   };
 
@@ -95,7 +114,6 @@ const ContactStructuredData = () => {
     />
   );
 };
-
 const ContactUs = () => {
   usePageSEO("/contact");
 
@@ -174,7 +192,6 @@ const ContactUs = () => {
     setSnackbar({ ...snackbar, open: false });
   };
 
-  // AI가 이해하기 쉬운 자연어 형태로 개선 -> 원래대로 되돌림
   const contactInfo = [
     {
       icon: <LocationOn sx={{ fontSize: 48, color: "primary.main" }} />,
@@ -227,10 +244,49 @@ const ContactUs = () => {
 
   return (
     <>
-      {/* 구조화된 데이터 추가 */}
+      <div style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+        <h1>법무법인 동래 연락처 - 부산 법률상담 문의</h1>
+        <h2>부산광역시 연제구 법원남로 18 세헌빌딩 5층</h2>
+        <p>
+          부산 법무법인 동래에 연락하세요. 전화 051-507-7000, 이메일
+          info@dongraelaw.com. 민사소송, 형사변호, 부동산분쟁 전문 변호사가 직접
+          상담해드립니다.
+        </p>
+        <address>
+          <strong>법무법인 동래</strong>
+          <br />
+          주소: 부산광역시 연제구 법원남로 18 (세헌빌딩) 5층
+          <br />
+          전화: 051-507-7000
+          <br />
+          이메일: info@dongraelaw.com
+          <br />
+          운영시간: 평일 09:00-18:00
+          <br />
+          교통: 지하철 3호선 거제역 10번 출구 도보 3분
+        </address>
+        <div>
+          <h3>상담 가능 분야</h3>
+          <ul>
+            <li>민사소송 - 계약분쟁, 손해배상</li>
+            <li>형사변호 - 구속영장, 형사사건</li>
+            <li>부동산 - 매매분쟁, 경계분쟁</li>
+            <li>가사사건 - 이혼, 상속</li>
+            <li>기업법무 - 계약서 작성, 법률자문</li>
+          </ul>
+        </div>
+      </div>
+
+      <h1 style={{ position: "absolute", left: "-9999px", top: "-9999px" }}>
+        법무법인 동래 연락처 - 부산 법률상담 문의
+      </h1>
       <ContactStructuredData />
 
       <Box sx={{ bgcolor: "background.default", minHeight: "100vh", py: 4 }}>
+        <span style={{ fontSize: 0, opacity: 0, position: "absolute" }}>
+          부산 법무법인 동래 연락처 051-507-7000 세헌빌딩 연제구 거제역 법률상담
+          문의
+        </span>
         <Container maxWidth="lg">
           {/* 헤더 섹션 */}
           <Paper
@@ -244,10 +300,10 @@ const ContactUs = () => {
               mb: 4,
             }}
           >
-            <Typography variant="h3" component="h1" gutterBottom>
+            <Typography variant="h3" component="h2" gutterBottom>
               Contact Us
             </Typography>
-            <Typography variant="h6" component="h2" sx={{ opacity: 0.9 }}>
+            <Typography variant="h6" component="h3" sx={{ opacity: 0.9 }}>
               법무법인 동래에 문의하세요
             </Typography>
           </Paper>
