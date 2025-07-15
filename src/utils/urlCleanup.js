@@ -1,4 +1,3 @@
-// utils/urlCleanup.js
 export const cleanUrl = (url) => {
   const urlObj = new URL(url);
 
